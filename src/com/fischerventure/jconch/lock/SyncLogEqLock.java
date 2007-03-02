@@ -19,10 +19,15 @@ package com.fischerventure.jconch.lock;
 public class SyncLogEqLock extends AbstractLogEqLock<Object> {
 
 	/**
+	 * The reference to the global instance.
+	 */
+	private static final SyncLogEqLock global = new SyncLogEqLock();
+
+	/**
 	 * Default constructor.
 	 */
 	public SyncLogEqLock() {
-
+		// Do nothing.
 	}
 
 	/**
@@ -31,7 +36,7 @@ public class SyncLogEqLock extends AbstractLogEqLock<Object> {
 	 * @return
 	 */
 	public static SyncLogEqLock getGlobalInstance() {
-		return null;
+		return global;
 	}
 
 	/**
