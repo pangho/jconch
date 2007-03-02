@@ -33,7 +33,7 @@ public class SyncLogEqLock extends AbstractLogEqLock<Object> {
 	/**
 	 * Provides the same instance of this class every time it is called.
 	 * 
-	 * @return
+	 * @return The global instance of this class.
 	 */
 	public static SyncLogEqLock getGlobalInstance() {
 		return global;
