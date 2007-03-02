@@ -1,0 +1,14 @@
+#summary LogEqLocks: Logically Equivallent Lock Providers
+#labels Featured,Phase-Requirements
+
+= Introduction =
+
+Java's monitor/lock coupling is missing a very useful piece of functionality: the ability to lock on _all_ logically equivallent objects.  This is very useful when you're processing, and you don't have the only possible instance representing a conceptual object.  A simple example of this situation would be in caching expensive calculations in a concurrent environment: you don't want to potentially re-do calculations, but double-checked locking is broken, and all referential locking leaves you with is locking the processing object -- and that means all potential requests for processing are blocked up.  Thanks to the new `[http://java.sun.com/j2se/1.5.0/docs/api/java/util/concurrent/package-summary.html java.util.concurrent]` package, there is a bit of nudging that can be done at the collection level.  However, there is still the problem of the surrounding processing, which isn't protected.  
+
+= Details =
+
+There are two kinds of logically equivallent locks (LogEqLock, pronounced like "logic-lock"):
+  * SyncLogEqLock -- Provides objects that can be `synchronized` on.
+  * RWLogEqLock -- Provides sources for read/write locks.
+
+This gives the user the most control over the way that these locks are used: either syntactic lock scoping, or manual lock scoping.  Some people like to have the check; some like to have enough rope to hang themself.
