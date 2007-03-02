@@ -58,9 +58,7 @@ abstract class AbstractLogEqLock<LOCK_T> {
 		}
 		holder.put(in, key);
 
-		// The WeakHashMap only clears on put. If it clears on get, this falls
-		// apart. We can't use "remove" here, despite the how much we might like
-		// to, because that will clear the map. At least, I *THINK* that's true.
+		// Now we're going to get the lock associated with the standard key.
 		final LOCK_T oldLock = locks.remove(key);
 		final LOCK_T outLock;
 		if (oldLock != null) {
