@@ -120,4 +120,44 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock>
 			forceGC();
 		}
 	}
+
+	@Test
+	public void verifyLosingDataBug() {
+		// I thought this was causing a bug, but it's not.
+		final T lockMaker = createTestInstance();
+		assertNotNull(lockMaker);
+		final Integer dataOne = new Integer(1);
+		final Object lockOne = lockMaker.getLock(dataOne);
+		lockMaker.getLock(new Integer(dataOne.intValue()));
+		forceGC();
+		final Object lockTwo = lockMaker
+				.getLock(new Integer(dataOne.intValue()));
+		final Object lockOneTwo = lockMaker.getLock(dataOne);
+		assertSame("Lock for new data after GC is different", lockOne, lockTwo);
+		assertSame("Lock for old data after GC is different", lockOne,
+				lockOneTwo);
+	}
+
+	@Test
+	public void tryForTheLosingDataBugAgain() {
+		// I thought this was causing a bug, but it's not.
+		final T lockMaker = createTestInstance();
+		assertNotNull(lockMaker);
+		final Integer dataOne = new Integer(1);
+		final Object lockOne = lockMaker.getLock(dataOne);
+		Integer dataTwo = new Integer(dataOne.intValue());
+		final Object lockTwo = lockMaker.getLock(dataTwo);
+		assertSame("Lock one and lock two are different", lockOne, lockTwo);
+		dataTwo = null;
+		forceGC();
+		final Object lockThree = lockMaker.getLock(new Integer(dataOne
+				.intValue()));
+		assertSame("Lock for new data after GC is different", lockOne,
+				lockThree);
+		forceGC();
+		final Object lockOneTwo = lockMaker.getLock(dataOne);
+		assertSame("Lock for old data after GC is different", lockOne,
+				lockOneTwo);
+	}
+
 }
