@@ -13,37 +13,40 @@ package com.fischerventure.jconch.lock;
  * A single instance of this class will provide the same {@link Object} instance
  * for each logically equivalent object passed in.
  * 
+ * @param <OBJ_T>
+ *            The type of object being processed by the lock.
  * @author Robert Fischer
  * 
  */
-public class SyncLogEqLock extends AbstractLogEqLock<Object> {
+public class SyncLogEqLock<OBJ_T> extends AbstractLogEqLock<OBJ_T, Object> {
 
-	/**
-	 * The reference to the global instance.
-	 */
-	private static final SyncLogEqLock global = new SyncLogEqLock();
+    /**
+     * The reference to the global instance.
+     */
+    private static final SyncLogEqLock<Object> global = new SyncLogEqLock<Object>();
 
-	/**
-	 * Default constructor.
-	 */
-	public SyncLogEqLock() {
-		// Do nothing.
-	}
+    /**
+     * Default constructor.
+     */
+    public SyncLogEqLock() {
+        // Do nothing.
+    }
 
-	/**
-	 * Provides the same instance of this class every time it is called.
-	 * 
-	 * @return The global instance of this class.
-	 */
-	public static SyncLogEqLock getGlobalInstance() {
-		return global;
-	}
+    /**
+     * Provides the same instance of this class every time it is called. To be
+     * used when a universally-valid global instance is required.
+     * 
+     * @return The global instance of this class.
+     */
+    public static SyncLogEqLock<Object> getGlobalInstance() {
+        return global;
+    }
 
-	/**
-	 * @return A newly-instantiated {@link Object}.
-	 */
-	@Override
-	protected Object createNewLock() {
-		return new Object();
-	}
+    /**
+     * @return A newly-instantiated {@link Object}.
+     */
+    @Override
+    protected Object createNewLock() {
+        return new Object();
+    }
 }
