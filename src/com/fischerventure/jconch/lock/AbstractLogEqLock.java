@@ -89,7 +89,7 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      *         provide a new lock.
      */
     protected synchronized boolean hasLockFor(final OBJ_T obj) {
-        return this.holder.containsKey(obj);
+        return this.locks.containsKey(obj);
     }
 
     /**
