@@ -1,7 +1,15 @@
 package com.fischerventure.jconch.lock;
 
+import static org.apache.commons.collections.map.AbstractReferenceMap.*;
+
+import java.lang.ref.Reference;
+import java.lang.ref.SoftReference;
 import java.util.Map;
 import java.util.WeakHashMap;
+
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.map.ReferenceIdentityMap;
 
 /**
  * Provides the basic implementation for logically equivalent locks.
@@ -25,12 +33,13 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      * Holds onto references of objects, so that we don't lose the keys we're
      * using in the other map.
      */
-    private final Map<Object, Object> holder = new WeakHashMap<Object, Object>();
+    private final Map<OBJ_T, OBJ_T> holder = MapUtils.synchronizedMap(new ReferenceIdentityMap(WEAK, HARD));
 
     /**
      * The object providing locks.
      */
-    private final Map<Object, LOCK_T> locks = new WeakHashMap<Object, LOCK_T>();
+    private final Map<OBJ_T, KeyAndLock> locks = MapUtils.synchronizedMap(MapUtils.lazyMap(
+            new WeakHashMap<OBJ_T, KeyAndLock>(), new KeyAndLockTransformer()));
 
     /**
      * Provides a lock for the given object.
@@ -46,38 +55,29 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
             return nullLock;
         }
 
-        // Get the object to use as the key. We have to track this object
-        // because we want to guaranty consistancy.
-        final Object key;
-        final Object exists = holder.remove(in);
-        if (exists != null) {
-            // We had a previous version that was logically equivalent. We want
-            // to use that old one as the key for consistancy's sake.
-            key = exists;
-        } else {
-            // There was no previous version, so we're going to use this one as
-            // a new key.
-            key = in;
-        }
-        holder.put(in, key);
-
-        // Now we're going to get the lock associated with the standard key.
-        final LOCK_T oldLock = locks.remove(key);
-        final LOCK_T outLock;
-        if (oldLock != null) {
-            // If we overwrote a lock we were using before, put the old one
-            // back and return it. We need to wipe out the previous object
-            // reference -- otherwise, it will be GC'ed and we'll lose the lock.
-            outLock = oldLock;
-        } else {
-            // There was no old lock, so we're using the newly-generated lock.
-            final LOCK_T newLock = createNewLock();
-            outLock = newLock;
+        // Get the canonical version of the logically equivalent objects. Note
+        // that the KeyAndLock holds a WeakReference, and the "get" is logically
+        // equivalent, so it's possible for the key to be GCed. If so, we need
+        // to repeat the process. Sooner or later the key will become the
+        // parameter to this method, which means it won't be GCed and we can
+        // terminate this algorithm.
+        OBJ_T key = null;
+        KeyAndLock keyAndLock = null;
+        while (key == null) {
+            keyAndLock = locks.get(in);
+            key = keyAndLock.getKey();
         }
 
-        // Store and then return the lock of choice.
-        locks.put(key, outLock);
-        return outLock;
+        // Now that we have a hard reference to the canonical key, we can put it
+        // into the refence-based holder to keep the canonical key from being
+        // GC'ed before the argument. Note that we don't want to do this if they
+        // are referentially the same argument, or we end up with a memory leak.
+        if (in != key) {
+            holder.put(in, key);
+        }
+
+        // Now we can return the lock we retrieved before
+        return keyAndLock.getLock();
     }
 
     /**
@@ -98,4 +98,53 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      * @return An object to use for a lock.
      */
     protected abstract LOCK_T createNewLock();
+
+    /**
+     * Provides both a key and its associated lock.
+     * 
+     * @author rfischer
+     * @version $Date: Apr 6, 2007 8:29:44 AM $
+     */
+    private final class KeyAndLock {
+
+        private final Reference keyRef;
+
+        private final LOCK_T lock;
+
+        public KeyAndLock(final OBJ_T key) {
+            keyRef = new SoftReference<OBJ_T>(key);
+            lock = createNewLock();
+        }
+
+        public OBJ_T getKey() {
+            return (OBJ_T) keyRef.get();
+        }
+
+        public LOCK_T getLock() {
+            return lock;
+        }
+    }
+
+    /**
+     * A transformer that takes the argument and generates a {@link KeyAndLock}
+     * from it.
+     * 
+     * @author rfischer
+     * @version $Date: Apr 6, 2007 8:34:26 AM $
+     */
+    private final class KeyAndLockTransformer implements Transformer {
+
+        /**
+         * Casts the argument into {@link OBJ_T} and then uses it to create a
+         * KeyAndLock for this instance.
+         * 
+         * @param key
+         *            The key to apply.
+         * @return The {@link KeyAndLock}
+         */
+        public KeyAndLock transform(final Object key) {
+            return new KeyAndLock((OBJ_T) key);
+        }
+
+    }
 }
