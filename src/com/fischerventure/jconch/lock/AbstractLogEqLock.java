@@ -48,7 +48,7 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      *            The object whose lock is wanted.
      * @return A lock for that object.
      */
-    public synchronized LOCK_T getLock(final OBJ_T in) {
+    public LOCK_T getLock(final OBJ_T in) {
         // Handle this case here, so we can assume that "in" is not null from
         // here on out.
         if (in == null) {
@@ -66,6 +66,11 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
         while (key == null) {
             keyAndLock = locks.get(in);
             key = keyAndLock.getKey();
+        }
+        if (keyAndLock == null) {
+            // This check is really in play to suppress a warning. It's a good
+            // sanity check, too, so I won't gripe.
+            throw new IllegalStateException("Impossible condition reached: keyAndLock is null");
         }
 
         // Now that we have a hard reference to the canonical key, we can put it
@@ -88,7 +93,7 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      * @return If {@link #getLock(Object)} applied to the parameter would
      *         provide a new lock.
      */
-    protected synchronized boolean hasLockFor(final OBJ_T obj) {
+    protected boolean hasLockFor(final OBJ_T obj) {
         return this.locks.containsKey(obj);
     }
 
@@ -107,7 +112,7 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      */
     private final class KeyAndLock {
 
-        private final Reference keyRef;
+        private final Reference<OBJ_T> keyRef;
 
         private final LOCK_T lock;
 
@@ -116,10 +121,22 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
             lock = createNewLock();
         }
 
+        /**
+         * Gets the key (if possible).
+         * 
+         * @return The given key, or <code>null</code> if it is no longer
+         *         accessible.
+         */
         public OBJ_T getKey() {
-            return (OBJ_T) keyRef.get();
+            return keyRef.get();
         }
 
+        /**
+         * Gets the lock for this key. What this actually is depends on the
+         * implementation of the containing class.
+         * 
+         * @return The lock to be used for this key.
+         */
         public LOCK_T getLock() {
             return lock;
         }
