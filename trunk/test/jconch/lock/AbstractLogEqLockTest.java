@@ -1,4 +1,4 @@
-package com.fischerventure.jconch.lock;
+package jconch.lock;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import jconch.lock.AbstractLogEqLock;
+import jconch.test.FrameworkTest;
+
 import org.junit.Test;
 
-import com.fischerventure.jconch.FrameworkTest;
 
 public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock>
 		extends FrameworkTest {

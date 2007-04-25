@@ -1,4 +1,4 @@
-package com.fischerventure.jconch.lock;
+package jconch.lock;
 
 /**
  * This class should be used to implement logically equivalent locks.

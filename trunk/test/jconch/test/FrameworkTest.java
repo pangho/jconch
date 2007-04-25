@@ -1,4 +1,4 @@
-package com.fischerventure.jconch;
+package jconch.test;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
