@@ -1,4 +1,4 @@
-package com.fischerventure.jconch.lock;
+package jconch.lock;
 
 import static org.apache.commons.collections.map.AbstractReferenceMap.*;
 

@@ -1,4 +1,4 @@
-package com.fischerventure.jconch.lock;
+package jconch.lock;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -6,9 +6,17 @@ import static org.junit.Assert.assertNotNull;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import jconch.lock.RWLogEqLock;
+import jconch.lock.SyncLogEqLock;
+
 import org.junit.Test;
 
-public class SyncLogEqLockTest extends AbstractLogEqLockTest<SyncLogEqLock> {
+/**
+ * Tests for {@link RWLogEqLock}.
+ * 
+ * @author Robert Fischer
+ */
+public class RWLogEqLockTest extends AbstractLogEqLockTest<RWLogEqLock> {
 
 	@Test
 	public void testGetGlobalInstance() {
@@ -54,8 +62,8 @@ public class SyncLogEqLockTest extends AbstractLogEqLockTest<SyncLogEqLock> {
 	}
 
 	@Override
-	protected SyncLogEqLock createTestInstance() {
-		return new SyncLogEqLock();
+	protected RWLogEqLock createTestInstance() {
+		return new RWLogEqLock();
 	}
 
 }
