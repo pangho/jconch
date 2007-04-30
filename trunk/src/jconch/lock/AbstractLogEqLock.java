@@ -145,9 +145,6 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
     /**
      * A transformer that takes the argument and generates a {@link KeyAndLock}
      * from it.
-     * 
-     * @author rfischer
-     * @version $Date: Apr 6, 2007 8:34:26 AM $
      */
     private final class KeyAndLockTransformer implements Transformer {
 
