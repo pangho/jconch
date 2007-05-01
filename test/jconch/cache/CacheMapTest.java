@@ -45,4 +45,20 @@ public class CacheMapTest {
 		map.get(null);
 		assertTrue("Does not contain null", map.containsKey(null));
 	}
+
+	@Test
+	public void containsKeyReturnsFalseOnWrongClass() {
+		final CacheMap<Integer, Object> map = new CacheMap<Integer, Object>(
+				NOPTransformer.getInstance());
+		assertFalse(map.containsKey(new Object()));
+	}
+
+	@Test
+	public void getKeyTwice() {
+		final CacheMap<Integer, Object> map = new CacheMap<Integer, Object>(
+				NOPTransformer.getInstance());
+		final Object out1 = map.get(new Integer(1));
+		final Object out2 = map.get(new Integer(1));
+		assertEquals(out1, out2);
+	}
 }
