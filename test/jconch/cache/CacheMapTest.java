@@ -2,12 +2,13 @@ package jconch.cache;
 
 import static org.junit.Assert.*;
 import jconch.lock.SyncLogEqLock;
+import jconch.test.FrameworkTest;
 
 import org.apache.commons.collections.functors.NOPTransformer;
 import org.apache.commons.lang.NullArgumentException;
 import org.junit.Test;
 
-public class CacheMapTest {
+public class CacheMapTest extends FrameworkTest {
 	@Test(expected = NullArgumentException.class)
 	public void singleConstructorExplodesOnNullArg() {
 		new CacheMap(null);
