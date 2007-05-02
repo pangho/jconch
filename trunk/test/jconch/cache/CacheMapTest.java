@@ -8,8 +8,6 @@ import org.apache.commons.lang.NullArgumentException;
 import org.junit.Test;
 
 public class CacheMapTest {
-	// TODO Test whether passing null to "contains value" will explode
-
 	@Test(expected = NullArgumentException.class)
 	public void singleConstructorExplodesOnNullArg() {
 		new CacheMap(null);
