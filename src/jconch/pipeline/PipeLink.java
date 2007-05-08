@@ -5,14 +5,6 @@ package jconch.pipeline;
  * 
  * @author Robert Fischer
  */
-public class PipeLink {
+public class PipeLink<IN_T, OUT_T> {
 
-    /**
-     * Determines if the pipe link has any elements currently in it.
-     * 
-     * @return If this link is empty.
-     */
-    public boolean isEmpty() {
-        return true;
-    }
 }
