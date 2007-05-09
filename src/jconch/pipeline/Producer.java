@@ -17,7 +17,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
 	/**
 	 * The link we drop into.
 	 */
-	protected final PipeLink<OUT_T, ?> link;
+	protected final PipeLink<OUT_T> link;
 
 	/**
 	 * Constructor.
@@ -30,7 +30,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
 	 *             If either argument is <code>null</code>.
 	 */
 	protected Producer(final ThreadingModel threading,
-			final PipeLink<OUT_T, ?> link) {
+			final PipeLink<OUT_T> link) {
 		super(threading);
 		if (link == null) {
 			throw new NullArgumentException("link");
@@ -43,7 +43,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
 	 * 
 	 * @return The link that the producer feeds into; never <code>null</code>.
 	 */
-	public PipeLink<OUT_T, ?> getLinkOut() {
+	public PipeLink<OUT_T> getLinkOut() {
 		return link;
 	}
 
@@ -63,4 +63,19 @@ public abstract class Producer<OUT_T> extends PipelineStage {
 	 * @return If there are more elements.
 	 */
 	public abstract boolean isExhausted();
+
+	@Override
+	final void execute() {
+		if (isExhausted()) {
+			logMessage("Called execute at wrong time",
+					new IllegalStateException("Pipeline is exhausted"));
+			return;
+		}
+		try {
+			final OUT_T out = produceItem();
+			link.
+		} catch (final Exception e) {
+			logMessage("Unknown exception", e);
+		}
+	}
 }
