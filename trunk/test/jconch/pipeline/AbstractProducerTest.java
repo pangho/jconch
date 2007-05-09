@@ -35,6 +35,5 @@ public abstract class AbstractProducerTest<PRODUCER_T extends Producer> extends 
         fixture = createFixture(link);
         assertNotNull("Fixture was not created", fixture);
         assertSame("Different link is being used", link, fixture.getLinkOut());
-        assertTrue("Link is not empty", link.isEmpty());
     }
 }

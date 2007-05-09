@@ -35,6 +35,9 @@ public abstract class PipelineStage {
 
 	/**
 	 * Executes the pipeline processing.
+	 * 
+	 * @throws IllegalStateException
+	 *             If there is nothing left to execute.
 	 */
 	abstract void execute();
 
@@ -44,4 +47,14 @@ public abstract class PipelineStage {
 	 * @return If the stage is exhausted.
 	 */
 	abstract boolean isExhausted();
+
+	/**
+	 * Called when an exception occurs in execution.
+	 * 
+	 * @param msg
+	 *            The message describing the problem (may be <code>null</code>)
+	 * @param e
+	 *            The exception which is the problem.
+	 */
+	protected abstract void logMessage(final String msg, final Exception e);
 }
