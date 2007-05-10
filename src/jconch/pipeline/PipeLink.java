@@ -1,6 +1,10 @@
 package jconch.pipeline;
 
-import java.util.Queue;
+import static java.lang.Math.max;
+
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.lang.NullArgumentException;
 
@@ -12,12 +16,12 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public class PipeLink<T> {
 
-    private final Queue<T> q;
+    private final BlockingQueue<T> q;
 
     /**
-     * A token that is signaled whenever a get/add happens.
+     * The timeout on fetches.
      */
-    protected final Object boundary = new Object();
+    private AtomicLong fetchTimeout = new AtomicLong(0L);
 
     /**
      * Constructor.
@@ -27,7 +31,7 @@ public class PipeLink<T> {
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
-    protected PipeLink(final Queue<T> queue) {
+    protected PipeLink(final BlockingQueue<T> queue) {
         if (queue == null) {
             throw new NullArgumentException("queue");
         }
@@ -48,18 +52,48 @@ public class PipeLink<T> {
             throw new NullArgumentException("in");
         }
         final boolean out = q.offer(in);
-        boundary.notifyAll();
         return out;
     }
 
     /**
-     * Removes an element from the link, if any is available.
+     * Gets the timeout on fetch operations of the instance.
+     * 
+     * @return the fetch timeout.
+     */
+    public long getFetchTimeout() {
+        return fetchTimeout.get();
+    }
+
+    /**
+     * Sets the fetch timeout of the instance. Positive values represent
+     * milliseconds to wait, and 0 means to not wait at all.
+     * 
+     * @param fetchTimeout
+     *            the fetch timeout to set
+     * @throws IllegalArgumentException
+     *             If the argument is < 0.
+     */
+    public void setFetchTimeout(final long newFetchTimeout) {
+        if (newFetchTimeout < 0) {
+            throw new IllegalArgumentException("Fetch timeout must be nonnegative");
+        }
+        fetchTimeout.set(newFetchTimeout);
+    }
+
+    /**
+     * Removes an element from the link, if any is available. This method may
+     * block for up to {@link #getFetchTimeout()} milliseconds for a value to
+     * become available.
      * 
      * @return The removed element, or <code>null</code> if the link is empty.
      */
     public T get() {
-        final T out = q.poll();
-        boundary.notifyAll();
-        return out;
+        // See if we get lucky and can bypass all the timeout logic
+        try {
+            return q.poll(max(1, getFetchTimeout()), TimeUnit.MILLISECONDS);
+        } catch (InterruptedException ie) {
+            return null;
+        }
     }
+
 }
