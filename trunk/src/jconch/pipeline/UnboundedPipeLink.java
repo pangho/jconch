@@ -1,7 +1,7 @@
 package jconch.pipeline;
 
-import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.lang.mutable.MutableLong;
 
@@ -32,7 +32,7 @@ public class UnboundedPipeLink<T> extends PipeLink<T> {
     /**
      * The timeout on fetches.
      */
-    private MutableLong fetchTimeout = new MutableLong(0L);
+    private AtomicLong fetchTimeout = new AtomicLong(0L);
 
     /**
      * Creates a new intance of <code>UnboundedPipeLink</code>.
@@ -49,9 +49,7 @@ public class UnboundedPipeLink<T> extends PipeLink<T> {
      * @return the fetch timeout.
      */
     public long getFetchTimeout() {
-        synchronized (fetchTimeout) {
-            return fetchTimeout.longValue();
-        }
+        return fetchTimeout.get();
     }
 
     /**
@@ -67,9 +65,7 @@ public class UnboundedPipeLink<T> extends PipeLink<T> {
         if (newFetchTimeout < 0) {
             throw new IllegalArgumentException("Fetch timeout must be nonnegative");
         }
-        synchronized (fetchTimeout) {
-            fetchTimeout.setValue(newFetchTimeout);
-        }
+        fetchTimeout.set(newFetchTimeout);
     }
 
     /**
