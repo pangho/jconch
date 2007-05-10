@@ -14,68 +14,76 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public abstract class Producer<OUT_T> extends PipelineStage {
 
-	/**
-	 * The link we drop into.
-	 */
-	protected final PipeLink<OUT_T> link;
+    /**
+     * The link we drop into.
+     */
+    protected final PipeLink<OUT_T> link;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param threading
-	 *            The threading model.
-	 * @param link
-	 *            The link we produce things into.
-	 * @throws NullArgumentException
-	 *             If either argument is <code>null</code>.
-	 */
-	protected Producer(final ThreadingModel threading,
-			final PipeLink<OUT_T> link) {
-		super(threading);
-		if (link == null) {
-			throw new NullArgumentException("link");
-		}
-		this.link = link;
-	}
+    /**
+     * Constructor.
+     * 
+     * @param threading
+     *            The threading model.
+     * @param link
+     *            The link we produce things into.
+     * @throws NullArgumentException
+     *             If either argument is <code>null</code>.
+     */
+    protected Producer(final ThreadingModel threading, final PipeLink<OUT_T> link) {
+        super(threading);
+        if (link == null) {
+            throw new NullArgumentException("link");
+        }
+        this.link = link;
+    }
 
-	/**
-	 * Provides the pipeline link out.
-	 * 
-	 * @return The link that the producer feeds into; never <code>null</code>.
-	 */
-	public PipeLink<OUT_T> getLinkOut() {
-		return link;
-	}
+    /**
+     * Provides the pipeline link out.
+     * 
+     * @return The link that the producer feeds into; never <code>null</code>.
+     */
+    public PipeLink<OUT_T> getLinkOut() {
+        return link;
+    }
 
-	/**
-	 * Method that must be implemented to queue the producer.
-	 * 
-	 * @return The next item for the producer.
-	 * @throws NoSuchElementException
-	 *             If there are no more elements.
-	 */
-	public abstract OUT_T produceItem();
+    /**
+     * Method that must be implemented to queue the producer.
+     * 
+     * @return The next item for the producer.
+     * @throws NoSuchElementException
+     *             If there are no more elements.
+     */
+    public abstract OUT_T produceItem();
 
-	/**
-	 * If more elements will be produced. If the current state is indeterminant,
-	 * this must block until it has an answer.
-	 * 
-	 * @return If there are more elements.
-	 */
-	public abstract boolean isExhausted();
+    /**
+     * If more elements will be produced. If the current state is indeterminant,
+     * this must block until it has an answer.
+     * 
+     * @return If there are more elements.
+     */
+    public abstract boolean isExhausted();
 
-	@Override
-	final void execute() {
-		if (isExhausted()) {
-			logMessage("Called execute at wrong time",
-					new IllegalStateException("Pipeline is exhausted"));
-			return;
-		}
-		try {
-			final OUT_T out = produceItem();
-			link.
-		} catch (final Exception e) {
-			logMessage("Unknown exception", e);
-		}
-	}
+    @Override
+    final void execute() {
+        // Make sure we're not already exhausted
+        if (isExhausted()) {
+            logMessage("Called execute at wrong time", new IllegalStateException("Pipeline is exhausted"));
+            return;
+        }
+
+        // Produce an element
+        final OUT_T out;
+        try {
+            out = produceItem();
+        } catch (final Exception e) {
+            logMessage("Exception when attempting to produce an item", e);
+            return;
+        }
+
+        try {
+            this.link.add(out);
+        } catch (Exception e) {
+            logMessage("Exception when attempting to write item", e);
+        }
+    }
 }
