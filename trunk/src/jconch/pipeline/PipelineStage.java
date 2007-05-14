@@ -49,6 +49,23 @@ public abstract class PipelineStage {
 	abstract boolean isExhausted();
 
 	/**
+	 * <p>
+	 * If the pipeline is not supposed to create any more elements. This
+	 * condition is true if {@link #isExhausted()} returns true, or if an error
+	 * condition has been detected.
+	 * </p>
+	 * <p>
+	 * <b>Inheritor's Note:</b> This method should be overriden to check error
+	 * conditions. This method simply checks for {@link #isExhausted()}.
+	 * </p>
+	 * 
+	 * @return If the pipeline is done creating elements.
+	 */
+	public boolean isFinished() {
+		return isExhausted();
+	}
+
+	/**
 	 * Called when an exception occurs in execution.
 	 * 
 	 * @param msg
