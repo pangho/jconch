@@ -21,7 +21,7 @@ public class InlineThreadingModel implements ThreadingModel {
 		if (toRun == null) {
 			throw new NullArgumentException("toRun");
 		}
-		while (!toRun.isExhausted()) {
+		while (!toRun.isFinished()) {
 			toRun.execute();
 		}
 	}
