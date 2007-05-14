@@ -21,6 +21,14 @@ import org.apache.commons.lang.NullArgumentException;
  * merged into a standard pipeline.
  * </p>
  * <p>
+ * This class has a concept of a "fetch timeout" ({@link #getFetchTimeout()}/{@link #setFetchTimeout(long)}).
+ * Although adding new elements will always be accepted, it is possible that a
+ * stall might cause a delay in processing. The fetch timeout is the amount of
+ * time to wait before the stall is detected. The default value is
+ * <code>0</code>, which means to not wait at all, but act in pass-through
+ * mode.
+ * </p>
+ * <p>
  * The link requires at least one <em>source</em> and one <em>sink</em> to
  * be registered before {@link #add(Object)} and {@link #get()} are usable. A
  * source will place elements into the link, and a sink will draw elements from
