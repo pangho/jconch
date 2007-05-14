@@ -12,14 +12,6 @@ import org.apache.commons.lang.mutable.MutableLong;
  * link, but allows potentially unlimited elements to build up, which can be
  * counter-productive to the multithreaded approach.
  * </p>
- * <p>
- * This class has a concept of a "fetch timeout" ({@link #getFetchTimeout()}/{@link #setFetchTimeout(long)}).
- * Although adding new elements will always be accepted, it is possible that a
- * stall might cause a delay in processing. The fetch timeout is the amount of
- * time to wait before the stall is detected. The default value is
- * <code>0</code>, which means to not wait at all, but act in pass-through
- * mode.
- * </p>
  * 
  * <p>
  * <a href="UnboundedPipeLink.java.html">View Source</a>
