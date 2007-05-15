@@ -6,8 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.lang.NullArgumentException;
 
 /**
- * The interface denoting that this element in the pipe produces new elements to
- * retrieve.
+ * The base implementation of a pipe that produces new elements to retrieve.
  * 
  * @param <OUT_T>
  *            The type of the object that is produced by this element.
@@ -67,20 +66,12 @@ public abstract class Producer<OUT_T> extends PipelineStage {
     public abstract OUT_T produceItem();
 
     /**
-     * If more elements will be produced. If the current state is indeterminant,
-     * this must block until it has an answer.
-     * 
-     * @return If there are more elements.
-     */
-    public abstract boolean isExhausted();
-
-    /**
      * In addition to the basic checks, checks for error conditions.
      * 
      * {@inheritDoc}
      */
     @Override
-    public boolean isFinished() {
+    public final boolean isFinished() {
         return super.isFinished() || createdNull.get() || failedAdd.get();
     }
 
