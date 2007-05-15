@@ -49,7 +49,11 @@ public class SpawningThreadingModel implements ThreadingModel {
             final Thread t = new Thread() {
                 @Override
                 public void run() {
-                    toRun.execute();
+                    try {
+                        toRun.execute();
+                    } catch (Exception e) {
+                        toRun.logMessage("Unhandled error during execute", e);
+                    }
                 }
             };
             t.start();
