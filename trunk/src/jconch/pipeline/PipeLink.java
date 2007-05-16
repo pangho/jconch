@@ -174,4 +174,30 @@ public class PipeLink<T> {
         }
         this.putTimeout.set(timeout);
     }
+
+    /**
+     * Provides the number of elements currently in the queue.
+     * 
+     * @return The number of queued elements.
+     */
+    public long getQueueSize() {
+        return this.q.size();
+    }
+
+    /**
+     * Provides an estimate of the number of elements the queue could
+     * additionally hold.
+     * 
+     * @return An estimate of the capcity of the queue.
+     */
+    public long getQueueCapacity() {
+        return this.q.remainingCapacity();
+    }
+
+    /**
+     * Drops all elements from this link.
+     */
+    public void clearQueue() {
+        this.q.clear();
+    }
 }
