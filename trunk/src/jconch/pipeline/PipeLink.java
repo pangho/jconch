@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.commons.collections.SetUtils;
 import org.apache.commons.collections.set.MapBackedSet;
 import org.apache.commons.collections.set.SynchronizedSet;
 import org.apache.commons.lang.NullArgumentException;
@@ -40,7 +41,7 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public class PipeLink<T> {
 
-    private final BlockingQueue<T> q;
+    final BlockingQueue<T> q;
 
     /**
      * The timeout on fetches.
@@ -55,7 +56,7 @@ public class PipeLink<T> {
     /**
      * The sources of this link.
      */
-    private final Set sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
+    final Set sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
 
     /**
      * Has this link been broken?
@@ -108,7 +109,7 @@ public class PipeLink<T> {
             return false;
         }
         try {
-            return q.offer(in, putTimeout.get(), TimeUnit.MILLISECONDS);
+            return q.offer(in, max(1, putTimeout.get()), TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
             return false;
         }
@@ -147,17 +148,28 @@ public class PipeLink<T> {
      * @return The removed element, or <code>null</code> if the link is empty.
      */
     public T get() {
+        // Check for the broken short-circuit
         if (isBroken.get()) {
             return null;
-        } else if (sources.isEmpty()) {
-            return q.poll();
-        } else {
-            try {
-                // TODO Can we detect sources becoming empty during this wait?
-                return q.poll(max(1, getFetchTimeout()), TimeUnit.MILLISECONDS);
-            } catch (InterruptedException ie) {
-                return null;
-            }
+        }
+
+        // Now drop into the loop
+        try {
+            final long fetchTime = max(1, getFetchTimeout());
+            final long endTime = System.currentTimeMillis() + fetchTime;
+            final long iterTime = max(1, fetchTime / 100);
+            do {
+                // See if we're expecting something to come
+                if (sources.isEmpty()) {
+                    // No sources: just return whatever we've got (if anything)
+                    return q.poll();
+                } else {
+                    // Sit on the wait for a while
+                    return q.poll(iterTime, TimeUnit.MILLISECONDS);
+                }
+            } while (System.currentTimeMillis() <= endTime);
+        } catch (InterruptedException ie) {
+            return null;
         }
     }
 
