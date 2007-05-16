@@ -2,6 +2,7 @@ package jconch.pipeline;
 
 import static java.lang.Math.max;
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.BlockingQueue;
@@ -9,7 +10,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.commons.collections.SetUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.set.MapBackedSet;
 import org.apache.commons.collections.set.SynchronizedSet;
 import org.apache.commons.lang.NullArgumentException;
@@ -56,7 +58,7 @@ public class PipeLink<T> {
     /**
      * The sources of this link.
      */
-    final Set sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
+    final Set<Producer<T>> sources = Collections.synchronizedSet(MapBackedSet.decorate(new WeakHashMap(2)));
 
     /**
      * Has this link been broken?
@@ -85,11 +87,28 @@ public class PipeLink<T> {
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
-    public void registerSource(final Object source) {
+    public void registerSource(final Producer<T> source) {
         if (source == null) {
             throw new NullArgumentException("source");
         }
         this.sources.add(source);
+    }
+
+    /**
+     * Filters out the finished sources.
+     */
+    private void checkSources() {
+        synchronized (this.sources) {
+            CollectionUtils.filter(this.sources, new Predicate() {
+                public boolean evaluate(final Object producerObj) {
+                    try {
+                        return !((Producer<T>) producerObj).isFinished();
+                    } catch (Exception e) {
+                        return false;
+                    }
+                }
+            });
+        }
     }
 
     /**
@@ -165,9 +184,17 @@ public class PipeLink<T> {
                     return q.poll();
                 } else {
                     // Sit on the wait for a while
-                    return q.poll(iterTime, TimeUnit.MILLISECONDS);
+                    final T out = q.poll(iterTime, TimeUnit.MILLISECONDS);
+                    if (out != null) {
+                        return out;
+                    } else {
+                        // Waited, didn't get anything -- drat.
+                        // Double-check our sources.
+                        checkSources();
+                    }
                 }
             } while (System.currentTimeMillis() <= endTime);
+            return null;
         } catch (InterruptedException ie) {
             return null;
         }
