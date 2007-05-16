@@ -10,10 +10,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
 import org.apache.commons.collections.set.MapBackedSet;
-import org.apache.commons.collections.set.SynchronizedSet;
 import org.apache.commons.lang.NullArgumentException;
 
 /**
@@ -98,16 +95,17 @@ public class PipeLink<T> {
      * Filters out the finished sources.
      */
     private void checkSources() {
-        synchronized (this.sources) {
-            CollectionUtils.filter(this.sources, new Predicate() {
-                public boolean evaluate(final Object producerObj) {
-                    try {
-                        return !((Producer<T>) producerObj).isFinished();
-                    } catch (Exception e) {
-                        return false;
-                    }
-                }
-            });
+        // This is really friggin' tricky because of threading issues and the
+        // weak references aspect.
+        // Best to work off our own (hard referenced) copy of the set elements,
+        // and make atomic calls back to sources.
+        final Producer[] sourcesArr = sources.toArray(new Producer[sources.size()]);
+        for (int i = 0; i < sourcesArr.length; i++) {
+            final Producer source = sourcesArr[i];
+            if (source != null && source.isFinished()) {
+                sources.remove(source);
+            }
+            sourcesArr[i] = null; // Allow it to be GCed
         }
     }
 
