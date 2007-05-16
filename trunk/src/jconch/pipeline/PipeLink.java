@@ -47,14 +47,14 @@ public class PipeLink<T> {
     private AtomicLong fetchTimeout = new AtomicLong(0L);
 
     /**
-     * The sources of this link.
+     * The timeout on puts.
      */
-    private final Set<Object> sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
+    private AtomicLong putTimeout = new AtomicLong(0L);
 
     /**
-     * The sinks of this link.
+     * The sources of this link.
      */
-    private final Set<Object> sinks = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
+    private final Set sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
 
     /**
      * Constructor.
@@ -86,20 +86,6 @@ public class PipeLink<T> {
     }
 
     /**
-     * Registers a sink for this pipe link.
-     * 
-     * @param sink
-     * @throws NullArgumentException
-     *             If the argument is <code>null</code>
-     */
-    public void registerSink(final Object sink) {
-        if (sink == null) {
-            throw new NullArgumentException("sink");
-        }
-        this.sinks.add(sink);
-    }
-
-    /**
      * Adds an element into the link, if at all possible.
      * 
      * @param in
@@ -112,9 +98,11 @@ public class PipeLink<T> {
         if (in == null) {
             throw new NullArgumentException("in");
         }
-        // TODO Check we have a sink
-        final boolean out = q.offer(in);
-        return out;
+        try {
+            return q.offer(in, putTimeout.get(), TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            return false;
+        }
     }
 
     /**
@@ -137,7 +125,7 @@ public class PipeLink<T> {
      */
     public void setFetchTimeout(final long newFetchTimeout) {
         if (newFetchTimeout < 0) {
-            throw new IllegalArgumentException("Fetch timeout must be nonnegative");
+            throw new IllegalArgumentException("Fetch timeout must be nonnegative; was " + newFetchTimeout);
         }
         fetchTimeout.set(newFetchTimeout);
     }
@@ -150,11 +138,40 @@ public class PipeLink<T> {
      * @return The removed element, or <code>null</code> if the link is empty.
      */
     public T get() {
-        // TODO If we don't have a source, don't bother waiting on the timeout
-        try {
-            return q.poll(max(1, getFetchTimeout()), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException ie) {
-            return null;
+        if (sources.isEmpty()) {
+            return q.poll();
+        } else {
+            try {
+                // TODO Can we detect sources becoming empty somehow?
+                return q.poll(max(1, getFetchTimeout()), TimeUnit.MILLISECONDS);
+            } catch (InterruptedException ie) {
+                return null;
+            }
         }
+    }
+
+    /**
+     * Gets the timeout on add operations of the instance.
+     * 
+     * @return the add timeout.
+     */
+    public long getAddTimeout() {
+        return putTimeout.get();
+    }
+
+    /**
+     * Sets the add timeout of the instance. Positive values represent
+     * milliseconds to wait, and 0 means to not wait at all.
+     * 
+     * @param fetchTimeout
+     *            the add timeout to set
+     * @throws IllegalArgumentException
+     *             If the argument is < 0.
+     */
+    public void setAddTimeout(final long timeout) {
+        if (timeout < 0) {
+            throw new IllegalArgumentException("Timeout must be positive; was " + timeout);
+        }
+        this.putTimeout.set(timeout);
     }
 }
