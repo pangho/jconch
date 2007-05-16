@@ -3,7 +3,7 @@ package jconch.pipeline;
 import org.apache.commons.lang.NullArgumentException;
 
 /**
- * Runs a single thread to process the threading.
+ * Runs a single different thread to process the threading.
  * 
  * @author Robert Fischer
  */
