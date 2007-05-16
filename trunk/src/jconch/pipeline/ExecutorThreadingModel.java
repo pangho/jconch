@@ -1,6 +1,7 @@
 package jconch.pipeline;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.lang.NullArgumentException;
@@ -16,6 +17,11 @@ import org.apache.commons.lang.time.DateUtils;
  * </p>
  * <p>
  * This class is thread safe: the state may be modified safely during execution.
+ * </p>
+ * <p>
+ * This class is somewhat optimized for a common case: {@link #finalize()} will
+ * detect if a {@link ThreadPoolExecutor} is being used and will call
+ * {@link ThreadPoolExecutor#shutdown()} to enable an orderly shutdown.
  * </p>
  * 
  * <p>
@@ -106,6 +112,17 @@ public class ExecutorThreadingModel implements ThreadingModel {
      */
     public void setSpawnDelay(final long spawnDelay) {
         this.spawnDelay.set(Math.max(spawnDelay, 1));
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try {
+            if (exec instanceof ThreadPoolExecutor) {
+                ((ThreadPoolExecutor) exec).shutdown();
+            }
+        } finally {
+            super.finalize();
+        }
     }
 
 }
