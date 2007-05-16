@@ -153,7 +153,7 @@ public class PipeLink<T> {
             return q.poll();
         } else {
             try {
-                // TODO Can we detect sources becoming empty somehow?
+                // TODO Can we detect sources becoming empty during this wait?
                 return q.poll(max(1, getFetchTimeout()), TimeUnit.MILLISECONDS);
             } catch (InterruptedException ie) {
                 return null;
