@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.NullArgumentException;
+import org.apache.commons.lang.UnhandledException;
 
 /**
  * The base implementation of a pipe that produces new elements to retrieve.
@@ -72,7 +73,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
      */
     @Override
     public final boolean isFinished() {
-        return super.isFinished() || createdNull.get() || failedAdd.get();
+        return super.isFinished() || isExhausted() || createdNull.get() || failedAdd.get();
     }
 
     /**
@@ -89,6 +90,8 @@ public abstract class Producer<OUT_T> extends PipelineStage {
         } else if (isExhausted()) {
             ise = new IllegalStateException("Pipeline is exhausted");
         } else if (isFinished()) {
+            // TODO Check all the previous conditions once more
+            // (Could be a race condition)
             ise = new IllegalStateException("Indeterminant reason");
         } else {
             ise = null;
@@ -103,6 +106,8 @@ public abstract class Producer<OUT_T> extends PipelineStage {
         try {
             out = produceItem();
         } catch (final Exception e) {
+            // We don't track this error condition, because that's what
+            // #isExhausted is for!
             logMessage("Exception when attempting to produce an item", e);
             return;
         }
@@ -121,4 +126,11 @@ public abstract class Producer<OUT_T> extends PipelineStage {
             logMessage("Exception when attempting to write item", e);
         }
     }
+
+    /**
+     * Determines if the pipeline stage will not produce any more elements.
+     * 
+     * @return If the stage is exhausted.
+     */
+    protected abstract boolean isExhausted();
 }

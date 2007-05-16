@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.commons.lang.NullArgumentException;
 
 /**
@@ -12,7 +14,15 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public abstract class Consumer<T> extends PipelineStage {
 
+    /**
+     * The inbound pipeline.
+     */
     protected final PipeLink<T> link;
+
+    /**
+     * If we've seen a <code>null</code> value from the link.
+     */
+    private final AtomicBoolean sawNull = new AtomicBoolean(false);
 
     /**
      * Creates a new instance of <code>Consumer</code>.
@@ -44,11 +54,45 @@ public abstract class Consumer<T> extends PipelineStage {
     public abstract void consumeItem(final T item);
 
     /**
-     * 
+     * Fetches an object and calls {@link #consumeItem(Object)} on it.
      */
     @Override
     final void execute() {
-        // TODO Code this up.
+        // Make sure we're not already done
+        final IllegalStateException ise;
+        if (sawNull.get()) {
+            ise = new IllegalStateException("Already exhausted incoming pipeline");
+        } else if (isFinished()) {
+            // TODO Check all the previous conditions once more
+            // (Could be a race condition)
+            ise = new IllegalStateException("Indeterminant reason");
+        } else {
+            ise = null;
+        }
+        if (ise != null) {
+            logMessage("Called execute at wrong time", ise);
+            return;
+        }
+
+        // Get the target
+        final T target;
+        try {
+            target = link.get();
+        } catch (Exception e) {
+            logMessage("Unknown exception when retrieving object", e);
+            return;
+        }
+
+        // Now delegate to the polymorphic consumption
+        if (target == null) {
+            sawNull.set(true);
+        } else {
+            try {
+                consumeItem(target);
+            } catch (Exception e) {
+                logMessage("Unknown exception when consuming object", e);
+            }
+        }
     }
 
     /**
@@ -57,7 +101,7 @@ public abstract class Consumer<T> extends PipelineStage {
      * {@inheritDoc}
      */
     @Override
-    public final boolean isFinished() {
-        return super.isFinished();
+    public boolean isFinished() {
+        return super.isFinished() || sawNull.get();
     }
 }
