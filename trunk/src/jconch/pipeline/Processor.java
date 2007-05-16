@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import java.util.NoSuchElementException;
+
 import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
 
 /**
@@ -56,7 +58,12 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
         in.execute();
 
         // See if we got something
-        final IN_T obj = in.getCollection().iterator().next();
+        final IN_T obj;
+        try {
+            obj = in.getCollection().iterator().next();
+        } catch (NoSuchElementException nsee) {
+            return;
+        }
         if (obj == null) {
             return;
         }
