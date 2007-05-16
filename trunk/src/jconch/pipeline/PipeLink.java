@@ -94,7 +94,7 @@ public class PipeLink<T> {
     /**
      * Filters out the finished sources.
      */
-    private void checkSources() {
+    private final void checkSources() {
         // This is really friggin' tricky because of threading issues and the
         // weak references aspect.
         // Best to work off our own (hard referenced) copy of the set elements,
@@ -170,11 +170,17 @@ public class PipeLink<T> {
             return null;
         }
 
+        // See if we get anything off the top
+        final T attempt1 = q.poll();
+        if (attempt1 != null) {
+            return attempt1;
+        }
+
         // Now drop into the loop
         try {
             final long fetchTime = max(1, getFetchTimeout());
             final long endTime = System.currentTimeMillis() + fetchTime;
-            final long iterTime = max(1, fetchTime / 100);
+            final long iterTime = max(1, fetchTime / 10);
             do {
                 // See if we're expecting something to come
                 if (sources.isEmpty()) {
@@ -192,6 +198,8 @@ public class PipeLink<T> {
                     }
                 }
             } while (System.currentTimeMillis() <= endTime);
+
+            // Didn't see anything in our time period
             return null;
         } catch (InterruptedException ie) {
             return null;
