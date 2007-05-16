@@ -191,7 +191,7 @@ public class PipeLink<T> {
      * 
      * @return The number of queued elements.
      */
-    public long getQueueSize() {
+    public long getQueueLength() {
         return this.q.size();
     }
 
@@ -201,7 +201,7 @@ public class PipeLink<T> {
      * 
      * @return An estimate of the capcity of the queue.
      */
-    public long getQueueCapacity() {
+    public long getRemainingCapacity() {
         return this.q.remainingCapacity();
     }
 
