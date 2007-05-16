@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.commons.collections.set.MapBackedSet;
@@ -44,17 +45,22 @@ public class PipeLink<T> {
     /**
      * The timeout on fetches.
      */
-    private AtomicLong fetchTimeout = new AtomicLong(0L);
+    private final AtomicLong fetchTimeout = new AtomicLong(0L);
 
     /**
      * The timeout on puts.
      */
-    private AtomicLong putTimeout = new AtomicLong(0L);
+    private final AtomicLong putTimeout = new AtomicLong(0L);
 
     /**
      * The sources of this link.
      */
     private final Set sources = SynchronizedSet.decorate(MapBackedSet.decorate(new WeakHashMap(2)));
+
+    /**
+     * Has this link been broken?
+     */
+    private final AtomicBoolean isBroken = new AtomicBoolean(false);
 
     /**
      * Constructor.
@@ -98,6 +104,9 @@ public class PipeLink<T> {
         if (in == null) {
             throw new NullArgumentException("in");
         }
+        if (isBroken.get()) {
+            return false;
+        }
         try {
             return q.offer(in, putTimeout.get(), TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
@@ -138,7 +147,9 @@ public class PipeLink<T> {
      * @return The removed element, or <code>null</code> if the link is empty.
      */
     public T get() {
-        if (sources.isEmpty()) {
+        if (isBroken.get()) {
+            return null;
+        } else if (sources.isEmpty()) {
             return q.poll();
         } else {
             try {
@@ -199,5 +210,13 @@ public class PipeLink<T> {
      */
     public void clearQueue() {
         this.q.clear();
+    }
+
+    /**
+     * Breaks the link completely and permanently. Any new {@link #add(Object)}
+     * or {@link #get()} calls will fail after calling this method.
+     */
+    public void breakLink() {
+        isBroken.set(true);
     }
 }
