@@ -28,4 +28,17 @@ public class UnboundedPipeLink<T> extends PipeLink<T> {
     public UnboundedPipeLink() {
         super(new LinkedBlockingQueue<T>());
     }
+
+    /**
+     * Have to override this because
+     * {@link LinkedBlockingQueue#remainingCapacity()} doesn't work as expected --
+     * apparently an unbounded queue runs low on space after you insert
+     * elements.
+     * 
+     * {@inheritDoc}
+     */
+    @Override
+    public int getRemainingCapacity() {
+        return Integer.MAX_VALUE;
+    }
 }
