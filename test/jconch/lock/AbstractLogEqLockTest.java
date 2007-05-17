@@ -1,24 +1,14 @@
 package jconch.lock;
 
+import static org.junit.Assert.*;
 import static test.utils.MemoryTestUtils.forceGC;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-
-import java.lang.ref.Reference;
-import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import jconch.lock.AbstractLogEqLock;
 import jconch.test.FrameworkTest;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends FrameworkTest {
@@ -59,6 +49,7 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
     }
 
     @Test
+    @Ignore
     public void makeSureNewKeyDoesNotLoseLock() {
         final int val = Integer.MIN_VALUE;
         final T lockMaker = createTestInstance();
@@ -71,6 +62,7 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
         assertSame(lock1, lock2);
 
         // Now force a full GC
+        // (This takes a LOT of time, and it's why we're ignoring the test)
         forceGC();
 
         // Now make sure that we still get lock2 for val2.
@@ -79,6 +71,7 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
     }
 
     @Test
+    @Ignore
     public void doubleCheckWeHaveALockWhenWeHaveALock() {
         final T lockMaker = createTestInstance();
         assertNotNull(lockMaker);
@@ -90,11 +83,12 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
             final Object lock2 = lockMaker.getLock(value);
             assertNotNull(lock2);
             assertSame(lock1, lock2);
-            forceGC();
+            forceGC(); // This takes a LONG time
         }
     }
 
     @Test
+    @Ignore
     public void verifyLosingDataBug() {
         // I thought this was causing a bug, but it's not.
         final T lockMaker = createTestInstance();
@@ -110,6 +104,7 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
     }
 
     @Test
+    @Ignore
     public void tryForTheLosingDataBugAgain() {
         // I thought this was causing a bug, but it's not.
         final T lockMaker = createTestInstance();
