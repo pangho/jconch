@@ -234,9 +234,10 @@ public class PipeLink<T> {
     /**
      * Provides the number of elements currently in the queue.
      * 
-     * @return The number of queued elements.
+     * @return The minimum of the number of queued elements and
+     *         {@link Integer#MAX_VALUE}
      */
-    public long getQueueLength() {
+    public int getQueueLength() {
         return this.q.size();
     }
 
@@ -244,9 +245,10 @@ public class PipeLink<T> {
      * Provides an estimate of the number of elements the queue could
      * additionally hold.
      * 
-     * @return An estimate of the capcity of the queue.
+     * @return An estimate of the capcity of the queue, or
+     *         {@link Integer#MAX_VALUE} if it is unbounded.
      */
-    public long getRemainingCapacity() {
+    public int getRemainingCapacity() {
         return this.q.remainingCapacity();
     }
 
