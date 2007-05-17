@@ -3,8 +3,10 @@ package jconch.pipeline;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
@@ -30,10 +32,29 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
      */
     protected abstract int getMaxCapacity();
 
+    /**
+     * Creates a producer that can't actually produce anything, but can be used
+     * to populate {@link PipeLink#sources}.
+     * 
+     * @return A producer which is never finished, and will not allows
+     *         {@link Producer#start()} to be called.
+     */
+    protected Producer<Object> tokenProducer(final LINK_T fixture) {
+        final PipeLink<Object> link = fixture;
+        return new CollectionProducer<Object>(Arrays.asList(new Object[] { new Object() }),
+                new ExceptionThreadingModel(), link) {
+            @Override
+            protected void logMessage(String msg, Exception e) {
+                return;
+            }
+        };
+    }
+
     @Test
     public void validateCreateFixture() {
         assertNotNull("Created a null fixture", createFixture());
         assertNotSame("Created the same fixture twice", createFixture(), createFixture());
+        assertTrue("Fixture is created with a source", createFixture().sources.isEmpty());
     }
 
     @Test
@@ -137,6 +158,8 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         final long timeout = DateUtils.MILLIS_PER_SECOND;
         final Object monkey = new Object();
         final LINK_T fixture = createFixture();
+        final Producer<Object> source = tokenProducer(fixture);
+        assertNotNull("Source is null", source);
         fixture.setFetchTimeout(timeout);
         new Thread() {
             @Override
@@ -155,12 +178,25 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
 
     @Test
     public void demonstrateFetchTimeoutWithFailedGet() {
-        final long timeout = DateUtils.MILLIS_PER_SECOND;
         final LINK_T fixture = createFixture();
+        final Producer<Object> source = tokenProducer(fixture);
+        assertNotNull("Source was null", source);
+        final long timeout = DateUtils.MILLIS_PER_SECOND;
         fixture.setFetchTimeout(timeout);
         final long startTime = System.currentTimeMillis();
         final Object monkeyOut = fixture.get();
-        assertTrue("Did not wait long enough", System.currentTimeMillis() > startTime + timeout);
+        assertTrue("Did not wait long enough", System.currentTimeMillis() >= startTime + timeout);
+        assertNull("Got a value back", monkeyOut);
+    }
+
+    @Test
+    public void demonstrateFetchNoTimeoutWithNoSources() {
+        final LINK_T fixture = createFixture();
+        final long timeout = DateUtils.MILLIS_PER_SECOND;
+        fixture.setFetchTimeout(timeout);
+        final long startTime = System.currentTimeMillis();
+        final Object monkeyOut = fixture.get();
+        assertTrue("Looks like it waited", System.currentTimeMillis() < startTime + timeout);
         assertNull("Got a value back", monkeyOut);
     }
 
@@ -210,6 +246,10 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         final LINK_T fixture = createFixture();
         fixture.setAddTimeout(timeout);
 
+        // Add a source to keep the shortcut from hitting
+        final Producer source = tokenProducer(fixture);
+        assertNotNull("Source was null", source);
+
         // Saturate the link
         for (int i = 0; i < getMaxCapacity(); i++) {
             assertTrue("Add did not succeed when saturating pipe", fixture.add(new Object()));
@@ -218,7 +258,8 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         // Now check the timing
         final long startTime = System.currentTimeMillis();
         assertFalse("Add succeeded", fixture.add(new Object()));
-        assertTrue("Did not wait long enough", System.currentTimeMillis() > startTime + timeout);
+        assertTrue("Did not wait long enough: waited " + (System.currentTimeMillis() - startTime) + "ms", System
+                .currentTimeMillis() >= startTime + timeout);
     }
 
     @Test
@@ -246,4 +287,8 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         assertNull("Fixture returned an element after clear", fixture.get());
     }
 
+    @Test(expected = NullArgumentException.class)
+    public void addExplodesOnNull() {
+        createFixture().add(null);
+    }
 }
