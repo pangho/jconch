@@ -185,7 +185,7 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         fixture.setFetchTimeout(timeout);
         final long startTime = System.currentTimeMillis();
         final Object monkeyOut = fixture.get();
-        assertTrue("Did not wait long enough", System.currentTimeMillis() >= startTime + timeout);
+        assertTrue("Did not wait long enough", System.currentTimeMillis() *  1.1 >= startTime + timeout);
         assertNull("Got a value back", monkeyOut);
     }
 
@@ -259,7 +259,7 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         final long startTime = System.currentTimeMillis();
         assertFalse("Add succeeded", fixture.add(new Object()));
         assertTrue("Did not wait long enough: waited " + (System.currentTimeMillis() - startTime) + "ms", System
-                .currentTimeMillis() >= startTime + timeout);
+                .currentTimeMillis() * 1.1 >= startTime + timeout);
     }
 
     @Test
