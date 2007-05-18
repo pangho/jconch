@@ -26,6 +26,7 @@ public class ExecutorThreadingModelTest {
     public void executorCalledToExecuteThings() {
         final DirectTallyExecutor exec = new DirectTallyExecutor();
         final ExecutorThreadingModel fixture = new ExecutorThreadingModel(exec);
+        fixture.setSpawnDelay(0L);
         final int rounds = 10;
         final ThreadCapturingPipelineStage doMe = new ThreadCapturingPipelineStage(fixture, 10);
         doMe.start();

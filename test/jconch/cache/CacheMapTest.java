@@ -1,6 +1,9 @@
 package jconch.cache;
 
 import static org.junit.Assert.*;
+
+import java.util.Map;
+
 import jconch.lock.SyncLogEqLock;
 import jconch.test.FrameworkTest;
 
@@ -58,4 +61,51 @@ public class CacheMapTest extends FrameworkTest {
         final Object out2 = map.get(new Integer(1));
         assertEquals(out1, out2);
     }
+
+    @Test
+    public void clearClearsTheList() {
+        final CacheMap<Integer, Object> map = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        final Integer key = new Integer(1);
+        map.get(key);
+        assertTrue("Did not contain element", map.containsKey(key));
+        map.clear();
+        assertFalse("Contained element after clear", map.containsKey(key));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void putExplodesOnNullValue() {
+        final CacheMap<Integer, Object> map = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        final Integer key = new Integer(1);
+        map.put(key, null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void putAllExplodesOnNullValue() {
+        final Map<Integer, Object> in = null;
+        new CacheMap<Integer, Object>(NOPTransformer.getInstance()).putAll(in);
+    }
+
+    @Test
+    public void getTransformerGetsTheSameTransformer() {
+        final CacheMap<Integer, Object> map = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        assertSame(NOPTransformer.getInstance(), map.getTransformer());
+    }
+
+    @Test
+    public void checkOnEquals() {
+        final CacheMap<Integer, Object> map1 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        final CacheMap<Integer, Object> map2 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        assertTrue(map1.equals(map1));
+        assertFalse(map1.equals(null));
+        assertTrue(map1.equals(map2));
+        assertFalse(map1.equals(new Object()));
+    }
+
+    @Test
+    public void checkOnHashCode() {
+        final CacheMap<Integer, Object> map1 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        final CacheMap<Integer, Object> map2 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        assertEquals(map1.hashCode(), map2.hashCode());
+    }
+
 }
