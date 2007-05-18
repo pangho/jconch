@@ -7,5 +7,8 @@
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-testframework-3.2.jar"/>
+	<classpathentry kind="lib" path="lib/cglib-nodep-2.2_beta1.jar"/>
+	<classpathentry kind="lib" path="lib/easymock.jar"/>
+	<classpathentry kind="lib" path="lib/easymockclassextension.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
