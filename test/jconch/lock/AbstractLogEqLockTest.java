@@ -123,4 +123,13 @@ public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock> extends
         assertSame("Lock for old data after GC is different", lockOne, lockOneTwo);
     }
 
+    @Test
+    public void hasLockForDoesNotCreateLockFor() {
+        final T lockMaker = createTestInstance();
+        assertNotNull(lockMaker);
+        final Object toCheck = new Object();
+        assertFalse(lockMaker.hasLockFor(toCheck));
+        assertFalse(lockMaker.hasLockFor(toCheck));
+    }
+
 }
