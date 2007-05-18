@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
 
@@ -11,13 +13,13 @@ import org.apache.commons.lang.time.DateUtils;
  */
 public class SpawningThreadingModel implements ThreadingModel {
 
-    private final long waitTime;
+    private final AtomicLong waitTime;
 
     /**
      * Constructor that uses a default wait time between spawns.
      */
     public SpawningThreadingModel() {
-        this.waitTime = 1 * DateUtils.MILLIS_PER_SECOND;
+        this(1 * DateUtils.MILLIS_PER_SECOND);
     }
 
     /**
@@ -32,7 +34,7 @@ public class SpawningThreadingModel implements ThreadingModel {
         if (waitBetweenSpawns <= 0) {
             throw new IllegalArgumentException("Argument cannot be 0 or less");
         }
-        this.waitTime = waitBetweenSpawns;
+        this.waitTime = new AtomicLong(waitBetweenSpawns);
     }
 
     /**
@@ -58,10 +60,21 @@ public class SpawningThreadingModel implements ThreadingModel {
             };
             t.start();
             try {
-                t.join(waitTime);
+                t.join(waitTime.get());
             } catch (InterruptedException e) {
                 Thread.yield();
             }
         }
+    }
+
+    public long getSpawnPeriod() {
+        return waitTime.get();
+    }
+
+    public void setSpawnPeriod(final long period) {
+        if (period <= 0) {
+            throw new IllegalArgumentException("Argument cannot be 0 or less");
+        }
+        this.waitTime.set(period);
     }
 }
