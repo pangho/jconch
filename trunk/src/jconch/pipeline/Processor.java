@@ -4,6 +4,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+import jconch.pipeline.impl.CollectionConsumer;
+import jconch.pipeline.impl.CollectionProducer;
+import jconch.pipeline.impl.ExceptionThreadingModel;
+
 import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
 
 /**
@@ -33,13 +37,13 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
         final Processor me = this;
         in = new CollectionConsumer<IN_T>(new UnboundedFifoBuffer(), new ExceptionThreadingModel(), inLink) {
             @Override
-            protected void logMessage(String msg, Exception e) {
+            public void logMessage(String msg, Exception e) {
                 me.logMessage(msg, e);
             }
         };
         out = new CollectionProducer<OUT_T>(new UnboundedFifoBuffer(), new ExceptionThreadingModel(), outLink) {
             @Override
-            protected void logMessage(String msg, Exception e) {
+            public void logMessage(String msg, Exception e) {
                 me.logMessage(msg, e);
             }
         };
@@ -55,7 +59,7 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
     public abstract OUT_T process(final IN_T item);
 
     @Override
-    final void execute() {
+    public final void execute() {
         // First, draw an element in
         in.execute();
 

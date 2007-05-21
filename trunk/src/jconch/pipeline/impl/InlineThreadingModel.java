@@ -1,4 +1,7 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
+
+import jconch.pipeline.PipelineStage;
+import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
 

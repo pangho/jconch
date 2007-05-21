@@ -1,9 +1,12 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
+
+import jconch.pipeline.PipelineStage;
+import jconch.pipeline.ThreadingModel;
 
 /**
  * Class that explodes when {@link #execute(PipelineStage)} is called.
  */
-class ExceptionThreadingModel implements ThreadingModel {
+public class ExceptionThreadingModel implements ThreadingModel {
 
     /**
      * @throws RuntimeException

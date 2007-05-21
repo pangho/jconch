@@ -1,6 +1,7 @@
 package jconch.pipeline;
 
 import static org.junit.Assert.assertTrue;
+import jconch.pipeline.impl.BoundedPipeLink;
 
 import org.junit.Test;
 

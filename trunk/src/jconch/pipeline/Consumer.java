@@ -57,7 +57,7 @@ public abstract class Consumer<T> extends PipelineStage {
      * Fetches an object and calls {@link #consumeItem(Object)} on it.
      */
     @Override
-    final void execute() {
+    public final void execute() {
         // Make sure we're not already done
         final IllegalStateException ise;
         if (sawNull.get()) {

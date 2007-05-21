@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import jconch.pipeline.impl.InlineThreadingModel;
+
 import org.apache.commons.lang.NullArgumentException;
 import org.junit.Test;
 import static org.junit.Assert.*;

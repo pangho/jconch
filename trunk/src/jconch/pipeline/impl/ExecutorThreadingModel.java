@@ -1,8 +1,11 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicLong;
+
+import jconch.pipeline.PipelineStage;
+import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;

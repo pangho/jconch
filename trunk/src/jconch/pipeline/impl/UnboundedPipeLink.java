@@ -1,8 +1,10 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
+
+import jconch.pipeline.PipeLink;
 
 import org.apache.commons.lang.mutable.MutableLong;
 

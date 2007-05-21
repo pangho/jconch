@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import jconch.pipeline.impl.ExecutorThreadingModel;
+
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
 import org.easymock.classextension.EasyMock;
