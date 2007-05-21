@@ -1,4 +1,4 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import jconch.pipeline.impl.InlineThreadingModel;
 

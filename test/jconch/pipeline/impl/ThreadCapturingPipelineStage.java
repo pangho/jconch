@@ -1,7 +1,10 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jconch.pipeline.PipelineStage;
+import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.collections.ListUtils;
 import org.apache.commons.lang.time.DateUtils;
