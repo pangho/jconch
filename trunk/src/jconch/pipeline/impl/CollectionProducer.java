@@ -1,13 +1,13 @@
 package jconch.pipeline.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import jconch.pipeline.PipeLink;
 import jconch.pipeline.Producer;
 import jconch.pipeline.ThreadingModel;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.NullArgumentException;
 
 /**
@@ -17,7 +17,9 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public abstract class CollectionProducer<T> extends Producer<T> {
 
-    private final Collection<T> elts;
+    private final Collection elts;
+
+    private final Iterator<T> it;
 
     /**
      * Constructor.
@@ -32,7 +34,8 @@ public abstract class CollectionProducer<T> extends Producer<T> {
         if (data == null) {
             throw new NullArgumentException("data");
         }
-        elts = CollectionUtils.synchronizedCollection(data);
+        elts = data;
+        it = data.iterator();
     }
 
     /**
@@ -42,7 +45,9 @@ public abstract class CollectionProducer<T> extends Producer<T> {
      */
     @Override
     protected boolean isExhausted() {
-        return elts.isEmpty();
+        synchronized (it) {
+            return !it.hasNext();
+        }
     }
 
     /**
@@ -52,7 +57,9 @@ public abstract class CollectionProducer<T> extends Producer<T> {
     @Override
     public T produceItem() {
         try {
-            return elts.iterator().next();
+            synchronized (it) {
+                return it.next();
+            }
         } catch (NoSuchElementException nsee) {
             return null;
         }
