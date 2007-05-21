@@ -1,4 +1,4 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import static org.junit.Assert.*;
 import jconch.pipeline.impl.SpawningThreadingModel;
