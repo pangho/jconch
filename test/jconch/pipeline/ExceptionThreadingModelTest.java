@@ -1,6 +1,7 @@
 package jconch.pipeline;
 
 import static org.easymock.classextension.EasyMock.createMock;
+import jconch.pipeline.impl.ExceptionThreadingModel;
 
 import org.junit.Test;
 

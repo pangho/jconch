@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import jconch.pipeline.impl.CollectionProducer;
+import jconch.pipeline.impl.ExceptionThreadingModel;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
@@ -44,7 +47,7 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         return new CollectionProducer<Object>(Arrays.asList(new Object[] { new Object() }),
                 new ExceptionThreadingModel(), link) {
             @Override
-            protected void logMessage(String msg, Exception e) {
+            public void logMessage(String msg, Exception e) {
                 return;
             }
         };
@@ -185,7 +188,7 @@ public abstract class AbstractPipeLinkTest<LINK_T extends PipeLink<Object>> {
         fixture.setFetchTimeout(timeout);
         final long startTime = System.currentTimeMillis();
         final Object monkeyOut = fixture.get();
-        assertTrue("Did not wait long enough", System.currentTimeMillis() *  1.1 >= startTime + timeout);
+        assertTrue("Did not wait long enough", System.currentTimeMillis() * 1.1 >= startTime + timeout);
         assertNull("Got a value back", monkeyOut);
     }
 

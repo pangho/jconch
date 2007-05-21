@@ -80,7 +80,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
      * Checks state, generates an element, and then puts it into the queue.
      */
     @Override
-    final void execute() {
+    public final void execute() {
         // Make sure we're not already exhausted
         final IllegalStateException ise;
         if (createdNull.get()) {

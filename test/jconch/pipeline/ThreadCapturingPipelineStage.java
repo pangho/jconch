@@ -25,7 +25,7 @@ class ThreadCapturingPipelineStage extends PipelineStage {
     }
 
     @Override
-    void execute() {
+    public void execute() {
         executeThreads.add(Thread.currentThread());
         try {
             Thread.sleep(DateUtils.MILLIS_PER_SECOND / 10);
@@ -35,7 +35,7 @@ class ThreadCapturingPipelineStage extends PipelineStage {
     }
 
     @Override
-    protected void logMessage(String msg, Exception e) {
+    public void logMessage(String msg, Exception e) {
         // Does nothing
     }
 

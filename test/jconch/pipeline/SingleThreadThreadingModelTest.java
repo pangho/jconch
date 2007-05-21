@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import jconch.pipeline.impl.SingleThreadThreadingModel;
+
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;

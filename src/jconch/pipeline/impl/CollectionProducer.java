@@ -1,7 +1,11 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.Collection;
 import java.util.NoSuchElementException;
+
+import jconch.pipeline.PipeLink;
+import jconch.pipeline.Producer;
+import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.NullArgumentException;

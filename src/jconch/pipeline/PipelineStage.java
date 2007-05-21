@@ -39,7 +39,7 @@ public abstract class PipelineStage {
      * @throws IllegalStateException
      *             If there is nothing left to execute.
      */
-    abstract void execute();
+    public abstract void execute();
 
     /**
      * <p>
@@ -66,5 +66,5 @@ public abstract class PipelineStage {
      * @param e
      *            The exception which is the problem.
      */
-    protected abstract void logMessage(final String msg, final Exception e);
+    public abstract void logMessage(final String msg, final Exception e);
 }

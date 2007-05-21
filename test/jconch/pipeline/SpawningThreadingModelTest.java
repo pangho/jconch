@@ -1,6 +1,7 @@
 package jconch.pipeline;
 
 import static org.junit.Assert.*;
+import jconch.pipeline.impl.SpawningThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.math.RandomUtils;

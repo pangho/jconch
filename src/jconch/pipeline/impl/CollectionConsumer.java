@@ -1,6 +1,10 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.Collection;
+
+import jconch.pipeline.Consumer;
+import jconch.pipeline.PipeLink;
+import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.NullArgumentException;

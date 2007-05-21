@@ -1,7 +1,9 @@
-package jconch.pipeline;
+package jconch.pipeline.impl;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import jconch.pipeline.PipeLink;
 
 /**
  * A pipe link with a specified upper bound on the queue length.
