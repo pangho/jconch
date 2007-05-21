@@ -1,5 +1,6 @@
 package jconch.pipeline;
 
+import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -43,5 +44,10 @@ public class SingleThreadThreadingModelTest {
                 assertNotSame("Saw the same thread twice", t1, t2);
             }
         }
+    }
+
+    @Test(expected = NullArgumentException.class)
+    public void executeExplodesOnNull() {
+        new SingleThreadThreadingModel().execute(null);
     }
 }
