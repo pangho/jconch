@@ -103,8 +103,8 @@ public class CacheMapTest extends FrameworkTest {
 
     @Test
     public void checkOnHashCode() {
-        final CacheMap<Integer, Object> map1 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
-        final CacheMap<Integer, Object> map2 = new CacheMap<Integer, Object>(NOPTransformer.getInstance());
+        final CacheMap<Integer, Object> map1 = new CacheMap<Integer, Object>(NOPTransformer.INSTANCE);
+        final CacheMap<Integer, Object> map2 = new CacheMap<Integer, Object>(NOPTransformer.INSTANCE);
         assertEquals(map1.hashCode(), map2.hashCode());
     }
 
