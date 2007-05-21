@@ -122,14 +122,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      */
     public boolean containsKey(final Object key) {
         // Retrieve the read lock for this object
-        final Object lock;
-        try {
-            lock = this.locker.getLock((KEY_T) key);
-        } catch (ClassCastException cce) {
-            return false;
-        }
-
-        synchronized (lock) {
+        synchronized (this.locker.getLock((KEY_T) key)) {
             return this.base.containsKey(key);
         }
     }

@@ -12,6 +12,7 @@ import org.apache.commons.lang.NullArgumentException;
 import org.junit.Test;
 
 public class CacheMapTest extends FrameworkTest {
+
     @Test(expected = NullArgumentException.class)
     public void singleConstructorExplodesOnNullArg() {
         new CacheMap(null);
