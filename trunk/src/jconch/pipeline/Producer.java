@@ -4,7 +4,8 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.NullArgumentException;
-import org.apache.commons.lang.UnhandledException;
+
+
 
 /**
  * The base implementation of a pipe that produces new elements to retrieve.
