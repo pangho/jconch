@@ -5,8 +5,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.lang.NullArgumentException;
 
-
-
 /**
  * The base implementation of a pipe that produces new elements to retrieve.
  * 
@@ -99,7 +97,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
         }
         if (ise != null) {
             logMessage("Called execute at wrong time", ise);
-            return;
+            throw ise;
         }
 
         // Produce an element
@@ -116,7 +114,7 @@ public abstract class Producer<OUT_T> extends PipelineStage {
         // Check to see we've got something
         if (out == null) {
             createdNull.set(true);
-            logMessage("Null element retrieved", new NoSuchElementException("Cannot generate more elements"));
+            logMessage("Null element retrieved", new NoSuchElementException("Beyond the end of the pipe"));
             return;
         }
 

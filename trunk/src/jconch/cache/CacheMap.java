@@ -2,6 +2,7 @@ package jconch.cache;
 
 import static org.apache.commons.collections.MapUtils.synchronizedMap;
 
+import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -11,7 +12,6 @@ import jconch.lock.SyncLogEqLock;
 
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.NullArgumentException;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.math.RandomUtils;
 
 /**
@@ -102,15 +102,6 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
             throw new NullArgumentException("lockFactory");
         }
         this.locker = lockFactory;
-    }
-
-    /**
-     * Clears the cache.
-     */
-    public void clear() {
-        synchronized (base) {
-            base.clear();
-        }
     }
 
     /**
@@ -214,7 +205,8 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * Copies all of the giving mappings into the cache. For each entry in the
      * provided map, the general contract from {@link #put(Object, Object)}
-     * holds true.
+     * holds true. If the map passed in contains <code>null</code>, the cache
+     * will be left in an indeterminant state.
      * 
      * @param t
      *            The mapping to inject into the cache
@@ -227,9 +219,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
             throw new NullPointerException("Cannot act on null map");
         }
         for (final Map.Entry<? extends KEY_T, ? extends VAL_T> me : t.entrySet()) {
-            synchronized (this.locker.getLock(me.getKey())) {
-                this.put(me.getKey(), me.getValue());
-            }
+            this.put(me.getKey(), me.getValue());
         }
     }
 
@@ -305,5 +295,13 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      */
     public Transformer getTransformer() {
         return this.converter;
+    }
+
+    /**
+     * Clears the cache. If the map is in an indeterminant state, this places
+     * the map back into a determinant state.
+     */
+    public void clear() {
+        base.clear();
     }
 }
