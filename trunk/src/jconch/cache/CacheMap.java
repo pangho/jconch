@@ -2,7 +2,6 @@ package jconch.cache;
 
 import static org.apache.commons.collections.MapUtils.synchronizedMap;
 
-import java.util.AbstractMap;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
