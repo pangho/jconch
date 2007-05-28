@@ -1,6 +1,5 @@
 package jconch.pipeline.impl;
 
-import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import jconch.pipeline.PipeLink;
@@ -10,16 +9,16 @@ import jconch.pipeline.PipeLink;
  */
 public class BoundedPipeLink<T> extends PipeLink<T> {
 
-    /**
-     * Constructor.
-     * 
-     * @param maxElements
-     *            The maximum number of elements.
-     * @throws IllegalArgumentException
-     *             If the argument is not greater than zero.
-     */
-    public BoundedPipeLink(final int maxElements) {
-        super(new LinkedBlockingQueue<T>(maxElements));
-    }
+	/**
+	 * Constructor.
+	 * 
+	 * @param maxElements
+	 *            The maximum number of elements.
+	 * @throws IllegalArgumentException
+	 *             If the argument is not greater than zero.
+	 */
+	public BoundedPipeLink(final int maxElements) {
+		super(new LinkedBlockingQueue<T>(maxElements));
+	}
 
 }
