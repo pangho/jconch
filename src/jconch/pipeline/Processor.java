@@ -23,74 +23,78 @@ import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
  */
 public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
 
-    private final CollectionConsumer<IN_T> in;
+	private final CollectionConsumer<IN_T> in;
 
-    private final CollectionProducer<OUT_T> out;
+	private final CollectionProducer<OUT_T> out;
 
-    /**
-     * Creates a new intance of <code>Processor</code>.
-     * 
-     * @param threading
-     */
-    protected Processor(final ThreadingModel threading, final PipeLink<IN_T> inLink, final PipeLink<OUT_T> outLink) {
-        super(threading);
-        final Processor me = this;
-        in = new CollectionConsumer<IN_T>(new UnboundedFifoBuffer(), new ExceptionThreadingModel(), inLink) {
-            @Override
-            public void logMessage(String msg, Exception e) {
-                me.logMessage(msg, e);
-            }
-        };
-        out = new CollectionProducer<OUT_T>(new UnboundedFifoBuffer(), new ExceptionThreadingModel(), outLink) {
-            @Override
-            public void logMessage(String msg, Exception e) {
-                me.logMessage(msg, e);
-            }
-        };
-    }
+	/**
+	 * Creates a new intance of <code>Processor</code>.
+	 * 
+	 * @param threading
+	 */
+	protected Processor(final ThreadingModel threading,
+			final PipeLink<IN_T> inLink, final PipeLink<OUT_T> outLink) {
+		super(threading);
+		final Processor me = this;
+		in = new CollectionConsumer<IN_T>(new ExceptionThreadingModel(), inLink) {
+			@Override
+			public void logMessage(String msg, Exception e) {
+				me.logMessage("Inbound Error: " + msg, e);
+			}
+		};
+		out = new CollectionProducer<OUT_T>(new UnboundedFifoBuffer(),
+				new ExceptionThreadingModel(), outLink) {
+			@Override
+			public void logMessage(String msg, Exception e) {
+				me.logMessage("Outbound Error: " + msg, e);
+			}
+		};
+	}
 
-    /**
-     * The argument that implements the processing for this class.
-     * 
-     * @param item
-     *            The item to process.
-     * @return The processed item, or <code>null</code> to drop it.
-     */
-    public abstract OUT_T process(final IN_T item);
+	/**
+	 * The argument that implements the processing for this class.
+	 * 
+	 * @param item
+	 *            The item to process.
+	 * @return The processed item, or <code>null</code> to drop it.
+	 */
+	public abstract OUT_T process(final IN_T item);
 
-    @Override
-    public final void execute() {
-        // First, draw an element in
-        in.execute();
+	@Override
+	public final void execute() {
+		// First, draw an element in
+		in.execute();
 
-        // See if we got something
-        final IN_T obj;
-        try {
-            final Collection<IN_T> c = in.getCollection();
-            synchronized (c) {
-                final Iterator<IN_T> it = c.iterator();
-                obj = it.next();
-                it.remove();
-            }
-        } catch (NoSuchElementException nsee) {
-            return;
-        }
-        if (obj == null) {
-            return;
-        }
-        final OUT_T item = process(obj);
-        if (item == null) {
-            return;
-        }
+		// See if we got something
+		final IN_T obj;
+		try {
+			final Collection<IN_T> c = in.getCollection();
+			synchronized (c) {
+				final Iterator<IN_T> it = c.iterator();
+				obj = it.next();
+				it.remove();
+			}
+		} catch (NoSuchElementException nsee) {
+			// Already logged the failure to read something in
+			return;
+		}
+		if (obj == null) {
+			return;
+		}
+		final OUT_T item = process(obj);
+		if (item == null) {
+			// This means to drop an item.
+			return;
+		}
 
-        // Now put the element out
-        out.getCollection().add(item);
-        out.execute();
-    }
+		// Now put the element out
+		out.getCollection().add(item);
+		out.execute();
+	}
 
-    @Override
-    public boolean isFinished() {
-        return super.isFinished() || (in.isFinished() && out.isFinished());
-    }
+	@Override
+	public boolean isFinished() {
+		return super.isFinished() || (in.isFinished() && out.isFinished());
+	}
 
 }
