@@ -2,6 +2,7 @@ package jconch.pipeline;
 
 import static org.easymock.classextension.EasyMock.*;
 import static org.junit.Assert.*;
+import jconch.pipeline.impl.CollectionConsumer;
 import jconch.pipeline.impl.InlineThreadingModel;
 import jconch.pipeline.impl.UnboundedPipeLink;
 
@@ -34,7 +35,42 @@ public class ConsumerTest {
 
 	@Test
 	public void explodesIfExecuteCalledAfterSeeingNull() {
+		// Set up the scenario
+		final Object first = new Object();
+		final Object second = null;
 		final PipeLink<Object> link = createMock(PipeLink.class);
+		expect(link.get()).andReturn(first);
+		expect(link.get()).andReturn(second);
+		replay(link);
+
+		// Now test the functionality
+		final CollectionConsumer<Object> fixture = new CollectionConsumer<Object>(
+				new InlineThreadingModel(), link) {
+			@Override
+			public void logMessage(String msg, Exception e) {
+				// Do nothing
+			}
+		};
+		fixture.execute();
+		assertEquals("Collection is not the right size after first execute", 1,
+				fixture.getCollection().size());
+		assertTrue("Collection does not contain first element", fixture
+				.getCollection().contains(first));
+		fixture.execute();
+		assertEquals("Collection is not the right size after second execute",
+				1, fixture.getCollection().size());
+
+		// See if we get the explosion
+		Exception ex = null;
+		try {
+			fixture.execute();
+		} catch (IllegalStateException ise) {
+			ex = ise;
+		}
+		assertNotNull("Did not see exception on third execute", ex);
+
+		// Double-check the scenario ran right
+		verify(link);
 	}
 
 	/**
