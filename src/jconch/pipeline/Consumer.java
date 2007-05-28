@@ -14,94 +14,104 @@ import org.apache.commons.lang.NullArgumentException;
  */
 public abstract class Consumer<T> extends PipelineStage {
 
-    /**
-     * The inbound pipeline.
-     */
-    protected final PipeLink<T> link;
+	/**
+	 * The inbound pipeline.
+	 */
+	private final PipeLink<T> link;
 
-    /**
-     * If we've seen a <code>null</code> value from the link.
-     */
-    private final AtomicBoolean sawNull = new AtomicBoolean(false);
+	/**
+	 * If we've seen a <code>null</code> value from the link.
+	 */
+	private final AtomicBoolean sawNull = new AtomicBoolean(false);
 
-    /**
-     * Creates a new instance of <code>Consumer</code>.
-     * 
-     * @param threading
-     *            The model for this consumer to use.
-     * @param in
-     *            The link into this stage.
-     * @throws NullArgumentException
-     *             If either argument is <code>null</code>
-     */
-    protected Consumer(final ThreadingModel threading, final PipeLink<T> in) {
-        super(threading);
-        if (threading == null) {
-            throw new NullArgumentException("threading");
-        }
-        if (in == null) {
-            throw new NullArgumentException("in");
-        }
-        link = in;
-    }
+	/**
+	 * Creates a new instance of <code>Consumer</code>.
+	 * 
+	 * @param threading
+	 *            The model for this consumer to use.
+	 * @param in
+	 *            The link into this stage.
+	 * @throws NullArgumentException
+	 *             If either argument is <code>null</code>
+	 */
+	protected Consumer(final ThreadingModel threading, final PipeLink<T> in) {
+		super(threading);
+		if (threading == null) {
+			throw new NullArgumentException("threading");
+		}
+		if (in == null) {
+			throw new NullArgumentException("in");
+		}
+		link = in;
+	}
 
-    /**
-     * Responsible for consuming items.
-     * 
-     * @param item
-     *            The item to consume; never <code>null</code>
-     */
-    public abstract void consumeItem(final T item);
+	/**
+	 * Responsible for consuming items.
+	 * 
+	 * @param item
+	 *            The item to consume; never <code>null</code>
+	 */
+	public abstract void consumeItem(final T item);
 
-    /**
-     * Fetches an object and calls {@link #consumeItem(Object)} on it.
-     */
-    @Override
-    public final void execute() {
-        // Make sure we're not already done
-        final IllegalStateException ise;
-        if (sawNull.get()) {
-            ise = new IllegalStateException("Already exhausted incoming pipeline");
-        } else if (isFinished()) {
-            // TODO Check all the previous conditions once more
-            // (Could be a race condition)
-            ise = new IllegalStateException("Indeterminant reason");
-        } else {
-            ise = null;
-        }
-        if (ise != null) {
-            logMessage("Called execute at wrong time", ise);
-            return;
-        }
+	/**
+	 * Fetches an object and calls {@link #consumeItem(Object)} on it.
+	 */
+	@Override
+	public final void execute() {
+		// Make sure we're not already done
+		final IllegalStateException ise;
+		if (sawNull.get()) {
+			ise = new IllegalStateException(
+					"Already exhausted incoming pipeline");
+		} else if (isFinished()) {
+			// TODO Check all the previous conditions once more
+			// (Could be a race condition)
+			ise = new IllegalStateException("Indeterminant reason");
+		} else {
+			ise = null;
+		}
+		if (ise != null) {
+			logMessage("Called execute at wrong time", ise);
+			throw ise;
+		}
 
-        // Get the target
-        final T target;
-        try {
-            target = link.get();
-        } catch (Exception e) {
-            logMessage("Unknown exception when retrieving object", e);
-            return;
-        }
+		// Get the target
+		final T target;
+		try {
+			target = link.get();
+		} catch (Exception e) {
+			logMessage("Unknown exception when retrieving object", e);
+			return;
+		}
 
-        // Now delegate to the polymorphic consumption
-        if (target == null) {
-            sawNull.set(true);
-        } else {
-            try {
-                consumeItem(target);
-            } catch (Exception e) {
-                logMessage("Unknown exception when consuming object", e);
-            }
-        }
-    }
+		// Now delegate to the polymorphic consumption
+		if (target == null) {
+			sawNull.set(true);
+		} else {
+			try {
+				consumeItem(target);
+			} catch (Exception e) {
+				logMessage("Unknown exception when consuming object", e);
+			}
+		}
+	}
 
-    /**
-     * In addition to the super implementation, it checks for error conditions.
-     * 
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isFinished() {
-        return super.isFinished() || sawNull.get();
-    }
+	/**
+	 * In addition to the super implementation, it checks for error conditions.
+	 * 
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isFinished() {
+		return super.isFinished() || sawNull.get();
+	}
+
+	/**
+	 * Provides the pipe link that is being drawn from.
+	 * 
+	 * @return The inbound pipe link.
+	 */
+	protected PipeLink<T> getInPipeLink() {
+		return link;
+	}
 }
