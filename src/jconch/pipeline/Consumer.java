@@ -111,7 +111,7 @@ public abstract class Consumer<T> extends PipelineStage {
 	 * 
 	 * @return The inbound pipe link.
 	 */
-	protected PipeLink<T> getInPipeLink() {
+	public PipeLink<T> getLinkIn() {
 		return link;
 	}
 }

@@ -27,14 +27,14 @@ public abstract class PipelineStage {
     }
 
     /**
-     * Starts the pipeline.
+     * Starts the pipeline within its threading model.
      */
     public void start() {
         threads.execute(this);
     }
 
     /**
-     * Executes the pipeline processing.
+     * Executes one round of processing for this pipeline stage.
      * 
      * @throws IllegalStateException
      *             If there is nothing left to execute.
@@ -67,4 +67,13 @@ public abstract class PipelineStage {
      *            The exception which is the problem.
      */
     public abstract void logMessage(final String msg, final Exception e);
+
+    /**
+     * Gets the threading model of the instance.
+     * 
+     * @return the threading model
+     */
+    public ThreadingModel getThreadingModel() {
+        return threads;
+    }
 }
