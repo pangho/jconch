@@ -30,7 +30,7 @@ public class ConsumerTest {
 	public void constructorSetsThePipeLink() {
 		final PipeLink<Object> link = new UnboundedPipeLink<Object>();
 		assertEquals("Different link found", link, new NopConsumer(
-				new InlineThreadingModel(), link).getInPipeLink());
+				new InlineThreadingModel(), link).getLinkIn());
 	}
 
 	@Test
