@@ -3,136 +3,151 @@ package jconch.lock;
 import static org.testng.AssertJUnit.*;
 import static test.utils.MemoryTestUtils.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import jconch.test.FrameworkTest;
 
 import org.testng.annotations.Test;
 
-public abstract class AbstractLogEqLockTest<T extends AbstractLogEqLock>
-		extends FrameworkTest {
+import test.utils.MemoryTestUtils;
 
-	protected abstract T createTestInstance();
+public abstract class AbstractLogEqLockTest<LOCK_T, T extends AbstractLogEqLock<Long, LOCK_T>> extends FrameworkTest {
 
-	@Test(enabled = false)
-	public void doubleCheckWeHaveALockWhenWeHaveALock() {
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final String value = "This is a random string!";
-		final Object lock1 = lockMaker.getLock(value);
-		assertNotNull(lock1);
-		for (int i = 0; i < 2; i++) {
-			assertTrue(lockMaker.hasLockFor(value));
-			final Object lock2 = lockMaker.getLock(value);
-			assertNotNull(lock2);
-			assertSame(lock1, lock2);
-			forceGC(); // This takes a LONG time
-		}
-	}
+    protected abstract T createTestInstance();
 
-	@Test
-	public void hasLockForDoesNotCreateLockFor() {
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final Object toCheck = new Object();
-		assertFalse(lockMaker.hasLockFor(toCheck));
-		assertFalse(lockMaker.hasLockFor(toCheck));
-	}
+    @Test
+    public void generateObjectDoesNotGenerateSameObject() {
+        final int iters = 10000;
+        final Collection<Long> generated = new HashSet<Long>(iters, .1f);
+        for (int i = 0; i < iters; i++) {
+            final Long iterObj = this.generateNewValue();
+            assertNotNull("Generated a null value", iterObj);
+            assertFalse("Already saw generated value", generated.contains(iterObj));
+            generated.add(iterObj);
+        }
+    }
 
-	@Test(enabled = false)
-	public void makeSureNewKeyDoesNotLoseLock() {
-		final int val = Integer.MIN_VALUE;
-		final T lockMaker = this.createTestInstance();
+    @Test(invocationCount = 2)
+    public void doubleCheckWeHaveALockWhenWeHaveALock() {
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final Long value = this.generateNewValue();
+        final LOCK_T lock1 = lockMaker.getLock(value);
+        assertNotNull(lock1);
+        for (int i = 0; i < 2; i++) {
+            assertTrue(lockMaker.hasLockFor(value));
+            final LOCK_T lock2 = lockMaker.getLock(value);
+            assertNotNull(lock2);
+            assertSame(lock1, lock2);
+            forceGC(); // This takes a LONG time
+        }
+    }
 
-		// Get a lock whose key could be GC'ed.
-		final Object lock1 = lockMaker.getLock(new Integer(val));
-		final Integer val2 = new Integer(val);
-		final Object lock2 = lockMaker.getLock(val2);
-		assertNotNull(lock1);
-		assertSame(lock1, lock2);
+    protected final Long generateNewValue() {
+        try {
+            Thread.sleep(2L);
+        } catch (final InterruptedException e) {
+            MemoryTestUtils.forceGC();
+            Thread.yield();
+        }
+        return System.currentTimeMillis();
+    }
 
-		// Now force a full GC
-		// (This takes a LOT of time, and it's why we're ignoring the test)
-		forceGC();
+    @Test
+    public void hasLockForDoesNotCreateLockFor() {
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final Long toCheck = this.generateNewValue();
+        assertFalse(lockMaker.hasLockFor(toCheck));
+        assertFalse(lockMaker.hasLockFor(toCheck));
+    }
 
-		// Now make sure that we still get lock2 for val2.
-		final Object lock2_2 = lockMaker.getLock(val2);
-		assertSame(lock2, lock2_2);
-	}
+    @Test
+    public void makeSureNewKeyDoesNotLoseLock() {
+        final T lockMaker = this.createTestInstance();
+        final long val = this.generateNewValue().longValue();
 
-	@Test
-	public void testCreateNewLockAlwaysCreatesANewLock() {
-		// Make sure that we're generating different locks all the time.
-		final int testingIterations = 1000;
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final List<Object> lockLists = new ArrayList<Object>(
-				testingIterations + 1);
-		for (int i = 0; i < testingIterations; i++) {
-			final Object nextLock = lockMaker.createNewLock();
-			assertNotNull(nextLock);
-			assertFalse(lockLists.contains(nextLock));
-			lockLists.add(lockLists);
-		}
-	}
+        // Get a lock whose key could be GC'ed.
+        final LOCK_T lock1 = lockMaker.getLock(new Long(val));
+        final Long val2 = new Long(val);
+        final LOCK_T lock2 = lockMaker.getLock(val2);
+        assertNotNull(lock1);
+        assertSame(lock1, lock2);
 
-	@Test
-	public void testHoldsOntoLock() {
-		// Make sure that we hold onto the same lock no matter how many times we
-		// call the method. There was a bug where we lost locks at about 2000,
-		// which dropped to 6 when I shrank the memory size.
-		final int testingIterations = 50000;
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final Integer testIn = new Integer(Integer.MAX_VALUE);
-		final Object lock = lockMaker.getLock(testIn);
-		for (int i = 0; i < testingIterations; i++) {
-			final Integer testTwo = new Integer(testIn.intValue());
-			assertEquals(testIn, testTwo);
-			assertNotSame(testIn, testTwo);
-			assertSame("Got a different lock on iteration " + (i + 1), lock,
-					lockMaker.getLock(testTwo));
-		}
-	}
+        // Now force a full GC
+        // (This takes a LOT of time, and it's why we're ignoring the test)
+        forceGC();
 
-	@Test(enabled = false)
-	public void tryForTheLosingDataBugAgain() {
-		// I thought this was causing a bug, but it's not.
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final Integer dataOne = new Integer(1);
-		final Object lockOne = lockMaker.getLock(dataOne);
-		Integer dataTwo = new Integer(dataOne.intValue());
-		final Object lockTwo = lockMaker.getLock(dataTwo);
-		assertSame("Lock one and lock two are different", lockOne, lockTwo);
-		dataTwo = null;
-		forceGC();
-		final Object lockThree = lockMaker.getLock(new Integer(dataOne
-				.intValue()));
-		assertSame("Lock for new data after GC is different", lockOne,
-				lockThree);
-		forceGC();
-		final Object lockOneTwo = lockMaker.getLock(dataOne);
-		assertSame("Lock for old data after GC is different", lockOne,
-				lockOneTwo);
-	}
+        // Now make sure that we still get lock2 for val2.
+        final LOCK_T lock2_2 = lockMaker.getLock(val2);
+        assertSame(lock2, lock2_2);
+    }
 
-	@Test(enabled = false)
-	public void verifyLosingDataBug() {
-		// I thought this was causing a bug, but it's not.
-		final T lockMaker = this.createTestInstance();
-		assertNotNull(lockMaker);
-		final Integer dataOne = new Integer(1);
-		final Object lockOne = lockMaker.getLock(dataOne);
-		lockMaker.getLock(new Integer(dataOne.intValue()));
-		forceGC();
-		final Object lockTwo = lockMaker
-				.getLock(new Integer(dataOne.intValue()));
-		final Object lockOneTwo = lockMaker.getLock(dataOne);
-		assertSame("Lock for new data after GC is different", lockOne, lockTwo);
-		assertSame("Lock for old data after GC is different", lockOne,
-				lockOneTwo);
-	}
+    @Test
+    public void testCreateNewLockAlwaysCreatesANewLock() {
+        // Make sure that we're generating different locks all the time.
+        final int testingIterations = 1000;
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final List<Object> lockLists = new ArrayList<Object>(testingIterations + 1);
+        for (int i = 0; i < testingIterations; i++) {
+            final Object nextLock = lockMaker.createNewLock();
+            assertNotNull(nextLock);
+            assertFalse(lockLists.contains(nextLock));
+            lockLists.add(lockLists);
+        }
+    }
+
+    @Test
+    public void testHoldsOntoLock() {
+        // Make sure that we hold onto the same lock no matter how many times we
+        // call the method. There was a bug where we lost locks at about 2000,
+        // which dropped to 6 when I shrank the memory size.
+        final int testingIterations = 50000;
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final Long testIn = this.generateNewValue();
+        final LOCK_T lock = lockMaker.getLock(testIn);
+        for (int i = 0; i < testingIterations; i++) {
+            final Long testTwo = new Long(testIn.longValue());
+            assertEquals(testIn, testTwo);
+            assertNotSame(testIn, testTwo);
+            assertSame("Got a different lock on iteration " + (i + 1), lock, lockMaker.getLock(testTwo));
+        }
+    }
+
+    @Test
+    public void tryForTheLosingDataBugAgain() {
+        // I thought this was causing a bug, but it's not.
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final Long dataOne = this.generateNewValue();
+        final LOCK_T lockOne = lockMaker.getLock(dataOne);
+        Long dataTwo = new Long(dataOne.longValue());
+        final LOCK_T lockTwo = lockMaker.getLock(dataTwo);
+        assertSame("Lock one and lock two are different", lockOne, lockTwo);
+        dataTwo = null;
+        forceGC();
+        final LOCK_T lockThree = lockMaker.getLock(new Long(dataOne.longValue()));
+        assertSame("Lock for new data after GC is different", lockOne, lockThree);
+        forceGC();
+        final LOCK_T lockOneTwo = lockMaker.getLock(dataOne);
+        assertSame("Lock for old data after GC is different", lockOne, lockOneTwo);
+    }
+
+    @Test
+    public void verifyLosingDataBug() {
+        // I thought this was causing a bug, but it's not.
+        final T lockMaker = this.createTestInstance();
+        assertNotNull(lockMaker);
+        final Long dataOne = generateNewValue();
+        final LOCK_T lockOne = lockMaker.getLock(dataOne);
+        lockMaker.getLock(new Long(dataOne.longValue()));
+        forceGC();
+        final LOCK_T lockTwo = lockMaker.getLock(new Long(dataOne.longValue()));
+        final LOCK_T lockOneTwo = lockMaker.getLock(dataOne);
+        assertSame("Lock for new data after GC is different", lockOne, lockTwo);
+        assertSame("Lock for old data after GC is different", lockOne, lockOneTwo);
+    }
 
 }
