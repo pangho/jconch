@@ -1,15 +1,11 @@
 package jconch.lock;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.testng.AssertJUnit.*;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import jconch.lock.RWLogEqLock;
-import jconch.lock.SyncLogEqLock;
-
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Tests for {@link RWLogEqLock}.
@@ -17,6 +13,11 @@ import org.junit.Test;
  * @author Robert Fischer
  */
 public class RWLogEqLockTest extends AbstractLogEqLockTest<RWLogEqLock> {
+
+	@Override
+	protected RWLogEqLock createTestInstance() {
+		return new RWLogEqLock();
+	}
 
 	@Test
 	public void testGetGlobalInstance() {
@@ -55,15 +56,10 @@ public class RWLogEqLockTest extends AbstractLogEqLockTest<RWLogEqLock> {
 		// Give things a chance to finish up.
 		try {
 			Thread.sleep(10 * maxWaitPerThread);
-		} catch (InterruptedException ie) {
+		} catch (final InterruptedException ie) {
 			Thread.yield();
 		}
 		assertFalse("Saw something different", sawSomethingDifferent.get());
-	}
-
-	@Override
-	protected RWLogEqLock createTestInstance() {
-		return new RWLogEqLock();
 	}
 
 }

@@ -1,13 +1,12 @@
 package jconch.pipeline;
 
+import static org.easymock.EasyMock.*;
 import static org.easymock.classextension.EasyMock.*;
-import static org.junit.Assert.*;
-import jconch.pipeline.impl.CollectionConsumer;
-import jconch.pipeline.impl.InlineThreadingModel;
-import jconch.pipeline.impl.UnboundedPipeLink;
+import static org.testng.AssertJUnit.*;
+import jconch.pipeline.impl.*;
 
 import org.apache.commons.lang.NullArgumentException;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 /**
  * Tests for {@link Consumer}.
@@ -16,12 +15,32 @@ import org.junit.Test;
  */
 public class ConsumerTest {
 
-	@Test(expected = NullArgumentException.class)
+	/**
+	 * Simple pass-through subclass.
+	 */
+	private static final class NopConsumer extends Consumer<Object> {
+
+		public NopConsumer(final ThreadingModel threading, final PipeLink in) {
+			super(threading, in);
+		}
+
+		@Override
+		public void consumeItem(final Object item) {
+			// Do nothing
+		}
+
+		@Override
+		public void logMessage(final String msg, final Exception e) {
+			// Do nothing
+		}
+	}
+
+	@Test(expectedExceptions = NullArgumentException.class)
 	public void constructorExplodesOnFirstNull() {
 		new NopConsumer(null, new UnboundedPipeLink<Object>());
 	}
 
-	@Test(expected = NullArgumentException.class)
+	@Test(expectedExceptions = NullArgumentException.class)
 	public void constructorExplodesOnSecondNull() {
 		new NopConsumer(new InlineThreadingModel(), null);
 	}
@@ -64,32 +83,12 @@ public class ConsumerTest {
 		Exception ex = null;
 		try {
 			fixture.execute();
-		} catch (IllegalStateException ise) {
+		} catch (final IllegalStateException ise) {
 			ex = ise;
 		}
 		assertNotNull("Did not see exception on third execute", ex);
 
 		// Double-check the scenario ran right
 		verify(link);
-	}
-
-	/**
-	 * Simple pass-through subclass.
-	 */
-	private static final class NopConsumer extends Consumer<Object> {
-
-		public NopConsumer(final ThreadingModel threading, final PipeLink in) {
-			super(threading, in);
-		}
-
-		@Override
-		public void consumeItem(final Object item) {
-			// Do nothing
-		}
-
-		@Override
-		public void logMessage(final String msg, final Exception e) {
-			// Do nothing
-		}
 	}
 }

@@ -1,7 +1,8 @@
 package jconch.test;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.testng.AssertJUnit.*;
+
+import org.testng.annotations.Test;
 
 /**
  * Token test to prove that the unit testing framework is working.

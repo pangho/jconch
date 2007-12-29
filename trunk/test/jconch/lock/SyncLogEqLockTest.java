@@ -1,16 +1,18 @@
 package jconch.lock;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.testng.AssertJUnit.*;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import jconch.lock.SyncLogEqLock;
-
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 public class SyncLogEqLockTest extends AbstractLogEqLockTest<SyncLogEqLock> {
+
+	@Override
+	protected SyncLogEqLock createTestInstance() {
+		return new SyncLogEqLock();
+	}
 
 	@Test
 	public void testGetGlobalInstance() {
@@ -49,15 +51,10 @@ public class SyncLogEqLockTest extends AbstractLogEqLockTest<SyncLogEqLock> {
 		// Give things a chance to finish up.
 		try {
 			Thread.sleep(10 * maxWaitPerThread);
-		} catch (InterruptedException ie) {
+		} catch (final InterruptedException ie) {
 			Thread.yield();
 		}
 		assertFalse("Saw something different", sawSomethingDifferent.get());
-	}
-
-	@Override
-	protected SyncLogEqLock createTestInstance() {
-		return new SyncLogEqLock();
 	}
 
 }
