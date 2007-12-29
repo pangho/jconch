@@ -33,13 +33,16 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
      * Holds onto references of objects, so that we don't lose the keys we're
      * using in the other map.
      */
+    @SuppressWarnings("unchecked")
     private final Map<OBJ_T, OBJ_T> holder = MapUtils.synchronizedMap(new ReferenceIdentityMap(WEAK, HARD));
 
     /**
      * The object providing locks.
      */
+    @SuppressWarnings("unchecked")
     private final Map<OBJ_T, KeyAndLock> locks = MapUtils.synchronizedMap(MapUtils.lazyMap(
-            new WeakHashMap<OBJ_T, KeyAndLock>(), new KeyAndLockTransformer()));
+            new WeakHashMap<OBJ_T, KeyAndLock>(),
+            new KeyAndLockTransformer()));
 
     /**
      * Provides a lock for the given object.
@@ -156,6 +159,7 @@ abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
          *            The key to apply.
          * @return The {@link KeyAndLock}
          */
+        @SuppressWarnings("unchecked")
         public KeyAndLock transform(final Object key) {
             return new KeyAndLock((OBJ_T) key);
         }
