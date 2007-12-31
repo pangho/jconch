@@ -1,7 +1,8 @@
 package jconch.pipeline;
 
-import java.util.NoSuchElementException;
-import java.util.concurrent.atomic.AtomicBoolean;
+import static org.apache.commons.collections.SetUtils.*;
+
+import java.util.*;
 
 import org.apache.commons.lang.NullArgumentException;
 
@@ -15,19 +16,31 @@ import org.apache.commons.lang.NullArgumentException;
 public abstract class Producer<OUT_T> extends PipelineStage {
 
     /**
+     * The kinds of errors that we can have.
+     */
+    private enum Errs {
+        failedAdd("Previously failed an add"), alreadyExhausted("This producer is exhausted"), errorsInProduction(
+                "There was an exception when we produced a previous item"), createdNull(
+                "Previously created null element");
+
+        final String message;
+
+        private Errs(final String msg) {
+            this.message = msg;
+        }
+    }
+
+    /**
      * The link we drop into.
      */
     protected final PipeLink<OUT_T> link;
 
     /**
-     * If we've created <code>null</code> before.
+     * The current set of errors. Once an item is added to a set, you CANNOT
+     * delete from this set.
      */
-    private final AtomicBoolean createdNull = new AtomicBoolean(false);
-
-    /**
-     * If we have failed to do an add before.
-     */
-    private final AtomicBoolean failedAdd = new AtomicBoolean(false);
+    @SuppressWarnings("unchecked")
+    private final Set<Errs> errors = typedSet(synchronizedSet(EnumSet.noneOf(Errs.class)), Errs.class);
 
     /**
      * Constructor.
@@ -72,7 +85,13 @@ public abstract class Producer<OUT_T> extends PipelineStage {
      */
     @Override
     public final boolean isFinished() {
-        return super.isFinished() || isExhausted() || createdNull.get() || failedAdd.get();
+        if (!errors.isEmpty()) {
+            return true;
+        } else if (isExhausted()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -82,16 +101,13 @@ public abstract class Producer<OUT_T> extends PipelineStage {
     public final void execute() {
         // Make sure we're not already exhausted
         final IllegalStateException ise;
-        if (createdNull.get()) {
-            ise = new IllegalStateException("Previously created null element");
-        } else if (failedAdd.get()) {
-            ise = new IllegalStateException("Previously failed an add");
-        } else if (isExhausted()) {
-            ise = new IllegalStateException("Pipeline is exhausted");
+        if (!errors.isEmpty()) {
+            ise = new IllegalStateException(errors.iterator().next().message);
         } else if (isFinished()) {
-            // TODO Check all the previous conditions once more
-            // (Could be a race condition)
             ise = new IllegalStateException("Indeterminant reason");
+        } else if (!errors.isEmpty()) {
+            // Double-check is to handle race condition possibility
+            ise = new IllegalStateException(errors.iterator().next().message);
         } else {
             ise = null;
         }
@@ -105,31 +121,36 @@ public abstract class Producer<OUT_T> extends PipelineStage {
         try {
             out = produceItem();
         } catch (final Exception e) {
-            // We don't track this error condition, because that's what
-            // #isExhausted is for!
+            errors.add(Errs.errorsInProduction);
             logMessage("Exception when attempting to produce an item", e);
             return;
         }
 
         // Check to see we've got something
         if (out == null) {
-            createdNull.set(true);
+            errors.add(Errs.createdNull);
             logMessage("Null element retrieved", new NoSuchElementException("Beyond the end of the pipe"));
             return;
         }
 
         try {
-            failedAdd.set(!this.link.add(out));
-        } catch (Exception e) {
-            failedAdd.set(true);
+            if (!link.add(out)) {
+                throw new RuntimeException("Adding to pipe link failed");
+            }
+        } catch (final Exception e) {
+            errors.add(Errs.failedAdd);
             logMessage("Exception when attempting to write item", e);
+            return;
         }
     }
 
     /**
-     * Determines if the pipeline stage will not produce any more elements.
+     * Determines if the pipeline stage will not produce any more elements. This
+     * may be called more than once, and once it returns true, it shall always
+     * return true.
      * 
      * @return If the stage is exhausted.
      */
     protected abstract boolean isExhausted();
+
 }

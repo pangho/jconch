@@ -1,12 +1,8 @@
 package jconch.pipeline;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
-import jconch.pipeline.impl.CollectionConsumer;
-import jconch.pipeline.impl.CollectionProducer;
-import jconch.pipeline.impl.ExceptionThreadingModel;
+import jconch.pipeline.impl.*;
 
 import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
 
@@ -34,16 +30,16 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
      */
     protected Processor(final ThreadingModel threading, final PipeLink<IN_T> inLink, final PipeLink<OUT_T> outLink) {
         super(threading);
-        final Processor me = this;
+        final Processor<IN_T, OUT_T> me = this;
         in = new CollectionConsumer<IN_T>(new ExceptionThreadingModel(), inLink) {
             @Override
-            public void logMessage(String msg, Exception e) {
+            public void logMessage(final String msg, final Exception e) {
                 me.logMessage("Inbound Error: " + msg, e);
             }
         };
         out = new CollectionProducer<OUT_T>(new UnboundedFifoBuffer(), new ExceptionThreadingModel(), outLink) {
             @Override
-            public void logMessage(String msg, Exception e) {
+            public void logMessage(final String msg, final Exception e) {
                 me.logMessage("Outbound Error: " + msg, e);
             }
         };
@@ -72,7 +68,7 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
                 obj = it.next();
                 it.remove();
             }
-        } catch (NoSuchElementException nsee) {
+        } catch (final NoSuchElementException nsee) {
             // Already logged the failure to read something in
             return;
         }
@@ -92,7 +88,7 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
 
     @Override
     public boolean isFinished() {
-        return super.isFinished() || (in.isFinished() && out.isFinished());
+        return (in.isFinished() && out.isFinished());
     }
 
     /**
