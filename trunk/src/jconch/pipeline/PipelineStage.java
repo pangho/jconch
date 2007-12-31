@@ -42,21 +42,12 @@ public abstract class PipelineStage {
     public abstract void execute();
 
     /**
-     * <p>
-     * If the pipeline is not supposed to create any more elements. This
-     * condition is true if {@link #isExhausted()} returns true, or if an error
-     * condition has been detected.
-     * </p>
-     * <p>
-     * <b>Inheritor's Note:</b> This method should be overriden to check error
-     * conditions. This method simply checks for {@link #isExhausted()}.
-     * </p>
+     * If the pipeline is not supposed to handle any more elements, either
+     * because of an error or because a producer is exhausted.
      * 
-     * @return If the pipeline is done creating elements.
+     * @return If the pipeline is done producing/consuming elements.
      */
-    public boolean isFinished() {
-        return false;
-    }
+    public abstract boolean isFinished();
 
     /**
      * Called when an exception occurs in execution.
