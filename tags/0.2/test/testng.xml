@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Everything" parallel="true" thread-count="100" >
+  <test name="Everything">
+    <packages>
+      <package name="jconch.lock.*" />
+      <package name="jconch.cache.*" />
+   </packages>
+ </test>
+</suite>
