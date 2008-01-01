@@ -1,10 +1,8 @@
 package jconch.pipeline;
 
-import static java.lang.Math.max;
+import static java.lang.Math.*;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -55,6 +53,7 @@ public class PipeLink<T> {
     /**
      * The sources of this link.
      */
+    @SuppressWarnings("unchecked")
     final Set<Producer<T>> sources = Collections.synchronizedSet(MapBackedSet.decorate(new WeakHashMap(2)));
 
     /**
@@ -102,7 +101,7 @@ public class PipeLink<T> {
         final Producer[] sourcesArr = sources.toArray(new Producer[sources.size()]);
         for (int i = 0; i < sourcesArr.length; i++) {
             final Producer source = sourcesArr[i];
-            if (source != null && source.isFinished()) {
+            if ((source != null) && source.isFinished()) {
                 sources.remove(source);
             }
             sourcesArr[i] = null; // Allow it to be GCed
@@ -127,7 +126,7 @@ public class PipeLink<T> {
         }
         try {
             return q.offer(in, max(1, putTimeout.get()), TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             return false;
         }
     }
@@ -201,7 +200,7 @@ public class PipeLink<T> {
 
             // Didn't see anything in our time period
             return null;
-        } catch (InterruptedException ie) {
+        } catch (final InterruptedException ie) {
             return null;
         }
     }
