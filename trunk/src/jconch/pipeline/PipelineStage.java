@@ -1,5 +1,7 @@
 package jconch.pipeline;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.apache.commons.lang.NullArgumentException;
 
 /**
@@ -10,6 +12,11 @@ import org.apache.commons.lang.NullArgumentException;
 public abstract class PipelineStage {
 
     private final ThreadingModel threads;
+
+    /**
+     * Have we started yet?
+     */
+    private final AtomicBoolean started = new AtomicBoolean(false);
 
     /**
      * Constructor.
@@ -27,10 +34,24 @@ public abstract class PipelineStage {
     }
 
     /**
-     * Starts the pipeline within its threading model.
+     * Starts the pipeline within its threading model. A pipline stage can only
+     * be started once; subsequent calls to this method do nothing.
      */
     public void start() {
-        threads.execute(this);
+        if (started.getAndSet(true)) {
+            threads.execute(this);
+        } else {
+            logMessage("Can only start once", new IllegalStateException("Called #start() when already started"));
+        }
+    }
+
+    /**
+     * Whether this pipline stage has been started or not.
+     * 
+     * @return If we have already started this pipeline stage.
+     */
+    public boolean isStarted() {
+        return started.get();
     }
 
     /**
