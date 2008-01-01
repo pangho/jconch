@@ -22,7 +22,7 @@ import org.apache.commons.collections.map.ReferenceIdentityMap;
  * @param <LOCK_T>
  *            The type of lock provided by the implementing class.
  */
-abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
+public abstract class AbstractLogEqLock<OBJ_T, LOCK_T> {
 
     /**
      * The object used to represent <code>null</code>.
