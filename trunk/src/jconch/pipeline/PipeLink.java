@@ -113,7 +113,7 @@ public class PipeLink<T> {
      * 
      * @param in
      *            The element to add.
-     * @returns <code>true</code> if the add succeeded
+     * @return <code>true</code> if the add succeeded
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
