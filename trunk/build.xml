@@ -121,6 +121,7 @@
 		>
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
 			<link href="http://commons.apache.org/collections/api-release/" />
+			<link href="http://commons.apache.org/lang/api-release/" />
 		</javadoc>
 		<jar basedir="${dir.build.jdoc}"
 		     destfile="${target.build-javadoc.jar}"
