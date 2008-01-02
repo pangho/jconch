@@ -12,7 +12,7 @@ import org.apache.commons.lang.NullArgumentException;
  *            The type that is produced.
  * @author Robert Fischer
  */
-public abstract class Consumer<T> extends PipelineStage {
+public abstract class Consumer<T> extends PipeStage {
 
     /**
      * The inbound pipeline.

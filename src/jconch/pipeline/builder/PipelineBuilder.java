@@ -2,7 +2,7 @@ package jconch.pipeline.builder;
 
 import jconch.pipeline.Consumer;
 import jconch.pipeline.PipeLink;
-import jconch.pipeline.PipelineStage;
+import jconch.pipeline.PipeStage;
 import jconch.pipeline.Processor;
 import jconch.pipeline.Producer;
 import jconch.pipeline.ThreadingModel;
@@ -13,9 +13,9 @@ import org.apache.commons.lang.NullArgumentException;
 /**
  * Class for programmatically building up a pipeline. It provides convenient
  * access to the {@link ThreadingModel} and {@link PipeLink} of the elements
- * {@link PipelineStage} that makes up the tail of the pipeline, as well as
+ * {@link PipeStage} that makes up the tail of the pipeline, as well as
  * enforcing type safety through generics. In addition, it starts the elements
- * (see {@link PipelineStage#start()}) as they are attached to the pipeline.
+ * (see {@link PipeStage#start()}) as they are attached to the pipeline.
  * 
  * @author Robert Fischer
  */

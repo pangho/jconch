@@ -17,7 +17,7 @@ import org.apache.commons.collections.buffer.UnboundedFifoBuffer;
  *            The output type.
  * @author Robert Fischer
  */
-public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
+public abstract class Processor<IN_T, OUT_T> extends PipeStage {
 
     private final CollectionConsumer<IN_T> in;
 

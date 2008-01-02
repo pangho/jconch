@@ -4,7 +4,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicLong;
 
-import jconch.pipeline.PipelineStage;
+import jconch.pipeline.PipeStage;
 import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
@@ -57,7 +57,7 @@ public class ExecutorThreadingModel implements ThreadingModel {
 
     /**
      * Delegates the execution of the argument to the underlying executor. Each
-     * call to {@link PipelineStage#execute()} is wrapped in its own
+     * call to {@link PipeStage#execute()} is wrapped in its own
      * {@link Runnable} that is passed to the {@link Executor} implementation
      * provided.
      * 
@@ -66,7 +66,7 @@ public class ExecutorThreadingModel implements ThreadingModel {
      * @throws NullArgumentException
      *             If the argument is <code>null</code>.
      */
-    public void execute(final PipelineStage toRun) {
+    public void execute(final PipeStage toRun) {
         if (toRun == null) {
             throw new NullArgumentException("toRun");
         }
