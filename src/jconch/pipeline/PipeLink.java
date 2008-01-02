@@ -93,6 +93,7 @@ public class PipeLink<T> {
     /**
      * Filters out the finished sources.
      */
+    @SuppressWarnings("unchecked")
     private final void checkSources() {
         // This is really friggin' tricky because of threading issues and the
         // weak references aspect.

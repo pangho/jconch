@@ -28,6 +28,7 @@ public abstract class Processor<IN_T, OUT_T> extends PipelineStage {
      * 
      * @param threading
      */
+    @SuppressWarnings("unchecked")
     protected Processor(final ThreadingModel threading, final PipeLink<IN_T> inLink, final PipeLink<OUT_T> outLink) {
         super(threading);
         final Processor<IN_T, OUT_T> me = this;
