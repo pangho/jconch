@@ -24,7 +24,10 @@ public abstract class Consumer<T> extends PipeStage {
      */
     private final AtomicBoolean sawNull = new AtomicBoolean(false);
 
-    private AtomicBoolean exceptionOnGet;
+    /**
+     * Was there an exception when we tried to get a value?
+     */
+    private final AtomicBoolean exceptionOnGet = new AtomicBoolean(false);
 
     /**
      * Creates a new instance of <code>Consumer</code>.
@@ -107,7 +110,7 @@ public abstract class Consumer<T> extends PipeStage {
      */
     @Override
     public boolean isFinished() {
-        return isFinished() || sawNull.get();
+        return sawNull.get();
     }
 
     /**
