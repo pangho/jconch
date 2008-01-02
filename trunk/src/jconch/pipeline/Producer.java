@@ -13,7 +13,7 @@ import org.apache.commons.lang.NullArgumentException;
  *            The type of the object that is produced by this element.
  * @author Robert Fischer
  */
-public abstract class Producer<OUT_T> extends PipelineStage {
+public abstract class Producer<OUT_T> extends PipeStage {
 
     /**
      * The kinds of errors that we can have.

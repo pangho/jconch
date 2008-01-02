@@ -1,6 +1,6 @@
 package jconch.pipeline.impl;
 
-import jconch.pipeline.PipelineStage;
+import jconch.pipeline.PipeStage;
 import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
@@ -18,7 +18,7 @@ public class SingleThreadThreadingModel implements ThreadingModel {
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
-    public void execute(final PipelineStage toRun) {
+    public void execute(final PipeStage toRun) {
         if (toRun == null) {
             throw new NullArgumentException("toRun");
         }

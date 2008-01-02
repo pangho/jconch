@@ -36,7 +36,7 @@ import org.apache.commons.lang.NullArgumentException;
  * 
  * @author Robert Fischer
  */
-public class PipeLink<T> {
+public class PipeLink<T> implements PipeElement {
 
     final BlockingQueue<T> q;
 
@@ -265,5 +265,12 @@ public class PipeLink<T> {
      */
     public void breakLink() {
         isBroken.set(true);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void start() {
+        // Do nothing.
     }
 }

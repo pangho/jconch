@@ -2,7 +2,7 @@ package jconch.pipeline.impl;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import jconch.pipeline.PipelineStage;
+import jconch.pipeline.PipeStage;
 import jconch.pipeline.ThreadingModel;
 
 import org.apache.commons.lang.NullArgumentException;
@@ -41,12 +41,12 @@ public class SpawningThreadingModel implements ThreadingModel {
     }
 
     /**
-     * Spawns a thread that calls {@link PipelineStage#execute()}.
+     * Spawns a thread that calls {@link PipeStage#execute()}.
      * 
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
-    public void execute(final PipelineStage toRun) {
+    public void execute(final PipeStage toRun) {
         if (toRun == null) {
             throw new NullArgumentException("toRun");
         }

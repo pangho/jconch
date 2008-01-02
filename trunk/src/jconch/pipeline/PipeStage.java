@@ -9,7 +9,7 @@ import org.apache.commons.lang.NullArgumentException;
  * 
  * @author Robert Fischer
  */
-public abstract class PipelineStage {
+public abstract class PipeStage implements PipeElement {
 
     private final ThreadingModel threads;
 
@@ -26,7 +26,7 @@ public abstract class PipelineStage {
      * @throws NullArgumentException
      *             If the argument is <code>null</code>
      */
-    protected PipelineStage(final ThreadingModel threading) {
+    protected PipeStage(final ThreadingModel threading) {
         if (threading == null) {
             throw new NullArgumentException("threading");
         }

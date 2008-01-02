@@ -18,5 +18,5 @@ public interface ThreadingModel {
 	 * @throws NullArgumentException
 	 *             If the argument is <code>null</code>
 	 */
-	void execute(final PipelineStage toRun);
+	void execute(final PipeStage toRun);
 }
