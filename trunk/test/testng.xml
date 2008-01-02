@@ -3,8 +3,7 @@
 <suite name="Everything" parallel="true" thread-count="100" >
   <test name="Everything">
     <packages>
-      <package name="jconch.lock.*" />
-      <package name="jconch.cache.*" />
+      <package name="jconch.*" />
    </packages>
  </test>
 </suite>

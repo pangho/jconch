@@ -1,11 +1,9 @@
 package jconch.pipeline.impl;
 
+import jconch.pipeline.*;
+
 import org.apache.commons.collections.Closure;
 import org.apache.commons.lang.NullArgumentException;
-
-import jconch.pipeline.Consumer;
-import jconch.pipeline.PipeLink;
-import jconch.pipeline.ThreadingModel;
 
 /**
  * A {@link Closure}-based implementation of a {@link Consumer}.
@@ -36,12 +34,12 @@ public abstract class ClosureConsumer extends Consumer {
      * @throws NullArgumentException
      *             If any argument is <code>null</code>
      */
-    protected ClosureConsumer(final Closure sink, ThreadingModel threading, PipeLink in) {
+    public ClosureConsumer(final Closure sink, final ThreadingModel threading, final PipeLink in) {
         super(threading, in);
         if (sink == null) {
             throw new NullArgumentException("sink");
         }
-        this.eater = sink;
+        eater = sink;
     }
 
     /**

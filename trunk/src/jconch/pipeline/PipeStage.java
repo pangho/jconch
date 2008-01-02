@@ -38,7 +38,7 @@ public abstract class PipeStage implements PipeElement {
      * be started once; subsequent calls to this method do nothing.
      */
     public void start() {
-        if (started.getAndSet(true)) {
+        if (!started.getAndSet(true)) {
             threads.execute(this);
         } else {
             logMessage("Can only start once", new IllegalStateException("Called #start() when already started"));
