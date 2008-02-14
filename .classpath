@@ -12,11 +12,10 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="dev-lib/cglib-nodep-2.1_3.jar"/>
 	<classpathentry kind="lib" path="dev-lib/commons-collections-testframework-3.2.jar"/>
-	<classpathentry kind="lib" path="dev-lib/commons-lang-2.3-javadoc.jar"/>
-	<classpathentry kind="lib" path="dev-lib/commons-lang-2.3-sources.jar"/>
 	<classpathentry kind="lib" path="dev-lib/easymock-2.3.jar"/>
 	<classpathentry kind="lib" path="dev-lib/easymockclassextension-2.2.2.jar"/>
 	<classpathentry kind="lib" path="dev-lib/testng-5.7-jdk15.jar"/>
 	<classpathentry kind="lib" path="dev-lib/persistence.jar"/>
+	<classpathentry kind="lib" path="dev-lib/spring-2.5.1.jar" sourcepath="dev-lib/spring-2.5.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

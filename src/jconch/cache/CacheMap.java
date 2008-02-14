@@ -1,15 +1,15 @@
 package jconch.cache;
 
+import static org.apache.commons.collections.CollectionUtils.transformedCollection;
 import static org.apache.commons.collections.MapUtils.synchronizedMap;
+import static org.apache.commons.collections.SetUtils.transformedSet;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import jconch.lock.SyncLogEqLock;
 
 import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.lang.NullArgumentException;
 import org.apache.commons.lang.math.RandomUtils;
 
@@ -57,7 +57,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * The map that provides the underlying data.
      */
-    private final Map<KEY_T, VAL_T> base = synchronizedMap(new WeakHashMap<KEY_T, VAL_T>());
+    private final Map<KEY_T, ResultHolder> base = synchronizedMap(new WeakHashMap());
 
     /**
      * The object that implements the locking for this object.
@@ -120,15 +120,20 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * Whether the value is in the cache.
      */
-    public boolean containsValue(Object value) {
+    public boolean containsValue(final Object value) {
         return base.containsValue(value);
     }
 
     /**
      * Provides the set of cached values.
      */
-    public Set<java.util.Map.Entry<KEY_T, VAL_T>> entrySet() {
-        return base.entrySet();
+    @SuppressWarnings("unchecked")
+    public Set<Entry<KEY_T, VAL_T>> entrySet() {
+        return transformedSet(base.keySet(), new Transformer() {
+            public Object transform(final Object keyObj) {
+                return new ResultExtractingTiedMapEntry(base, keyObj);
+            }
+        });
     }
 
     /**
@@ -149,14 +154,14 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
         final VAL_T out;
         synchronized (this.locker.getLock(key)) {
             // Try to get a lock
-            final VAL_T attemptedFetch = this.base.get(key);
+            final ResultHolder attemptedFetch = this.base.get(key);
             if (attemptedFetch != null) {
                 // Retrieved a cached value
-                out = attemptedFetch;
+                out = attemptedFetch.result;
             } else {
                 // Okay, doesn't look like we have anything
                 final VAL_T value = (VAL_T) this.converter.transform(key);
-                this.base.put(key, value);
+                this.base.put(key, new ResultHolder(value));
                 out = value;
             }
         }
@@ -187,31 +192,24 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      * @param key
      *            The key with which the specified value is to be associated.
      * @param value
-     *            The value to be associated with the specified key; may not be
+     *            The value to be associated with the specified key; may be
      *            <code>null</code>.
-     * @throws NullPointerException
-     *             If <code>value</code> is <code>null</code>.
      */
     public VAL_T put(final KEY_T key, final VAL_T value) {
-        if (value == null) {
-            throw new NullPointerException("Cannot act on null value");
-        }
         synchronized (this.locker.getLock(key)) {
-            return this.base.put(key, value);
+            return this.base.put(key, new ResultHolder(value)).result;
         }
     }
 
     /**
      * Copies all of the giving mappings into the cache. For each entry in the
      * provided map, the general contract from {@link #put(Object, Object)}
-     * holds true. If the map passed in contains <code>null</code>, the cache
-     * will be left in an indeterminant state.
+     * holds true.
      * 
      * @param t
      *            The mapping to inject into the cache
      * @throws NullPointerException
-     *             If <code>t</code> is <code>null</code>, or a value in
-     *             <code>t</code> is <code>null</code>.
+     *             If <code>t</code> is <code>null</code>.
      */
     public void putAll(final Map<? extends KEY_T, ? extends VAL_T> t) {
         if (t == null) {
@@ -228,7 +226,8 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     public VAL_T remove(final Object objKey) {
         final KEY_T key = (KEY_T) objKey;
         synchronized (this.locker.getLock(key)) {
-            return this.base.remove(key);
+            final ResultHolder removed = this.base.remove(key);
+            return removed == null ? null : removed.result;
         }
     }
 
@@ -242,8 +241,14 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * Provides the values which have been generated at the moment.
      */
+    @SuppressWarnings("unchecked")
     public Collection<VAL_T> values() {
-        return this.base.values();
+        return transformedCollection(this.base.values(), new Transformer() {
+            public Object transform(final Object resultHolderObj) {
+                final ResultHolder resultHandler = (ResultHolder) resultHolderObj;
+                return resultHandler == null ? null : resultHandler.result;
+            }
+        });
     }
 
     /**
@@ -302,5 +307,44 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      */
     public void clear() {
         base.clear();
+    }
+
+    /**
+     * A holder so that I can tell the difference between a generated
+     * <code>null</code> and a not-yet-tried-to-generate <code>null</code>.
+     * <P>
+     * Life would be really cool if I could do variant types, so I wouldn't have
+     * to deal with this kind of crap.
+     */
+    private final class ResultHolder {
+        public final VAL_T result;
+
+        public ResultHolder(final VAL_T result) {
+            this.result = result;
+        }
+
+        @Override
+        public String toString() {
+            return "" + result; // Handles null
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private class ResultExtractingTiedMapEntry extends TiedMapEntry {
+
+        public ResultExtractingTiedMapEntry(final Map map, final Object key) {
+            super(map, key);
+        }
+
+        @Override
+        public Object getValue() {
+            final ResultHolder superVal = (ResultHolder) super.getValue();
+            return superVal.result;
+        }
+
+        @Override
+        public Object setValue(final Object value) {
+            return super.setValue(new ResultHolder((VAL_T) value));
+        }
     }
 }
