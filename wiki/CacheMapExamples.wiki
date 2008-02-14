@@ -6,6 +6,8 @@ The purpose of a thread-safe lazy map is to cache expensive look-ups and calcula
 
 Down near the bottom, there is even an example of using a MultiKey to cache an arbitrary method.  Synchronization in that case works thanks to the LogEqLock synchronization and MultiKey's careful implementation.  Isn't it nifty how everything works together?
 
+Keep in mind that in all these cases, you're going to get to cache the most recent values.  Exactly how many values you get to cache depends on how much memory you have to spare and how aggressive your GC is.
+
 These examples are checked into source code [http://code.google.com/p/jconch/source/browse/trunk/eg/eg/jconch/cachemap/ here].
 
 == Database Entity Look-Ups ==
