@@ -4,6 +4,10 @@
 
 The purpose of a thread-safe lazy map is to cache expensive look-ups and calculations, where the cost of looking up a keyed value is so severe that it's worth spending some memory to cache commonly used values.  The most obvious example is in database look-ups, but DNS look-ups and potentially expensive data validations are other good cases.
 
+Down near the bottom, there is even an example of using a MultiKey to cache an arbitrary method.  Synchronization in that case works thanks to the LogEqLock synchronization.  Isn't it nifty how everything works together?
+
+These examples are checked into source code [http://code.google.com/p/jconch/source/browse/trunk/eg/eg/jconch/cachemap/ here].
+
 = Database Entity Look-Ups =
 
 Many applications spend a lot of time doing look-ups of ORM data entities by key.  This is trivially done with the lazy map.
@@ -12,10 +16,35 @@ Many applications spend a lot of time doing look-ups of ORM data entities by key
         public Object transform(final Object primaryKey) {
             return getEntityManager().find(ToyEntity.class, primaryKey);
         }
-    }, new SyncLogEqLock<Integer>());
+    });
 
     public static ToyEntity getEntity(final int primaryKey) {
         return entityCache.get(primaryKey);
     }
 }}}
-For a more thorough example, check out [http://code.google.com/p/jconch/source/browse/trunk/eg/eg/jconch/cachemap/BusinessClassThatNeedsADatabaseLookup.java BusinessClassThatNeedsADatabaseLookup] in the source repository.
+
+= Reverse DNS Look-Ups =
+
+As [http://www.oreillynet.com/onjava/blog/2005/11/reverse_dns_lookup_and_java.html noted elsewhere], reverse DNS lookups can be really incredibly slow.  Now, I'm not sure if Java or your operating system is going to be caching them, but if not, you could do something like this:
+{{{
+    private static final CacheMap<String, String> reverseDnsCache = new CacheMap<String, String>(new Transformer() {
+        public Object transform(Object dottedQuadObj) {
+            if (dottedQuadObj == null) {
+                return null;
+            }
+            try {
+                return InetAddress.getByName(dottedQuadObj.toString());
+            } catch (UnknownHostException e) {
+                return null;
+            }
+        }
+    });
+
+    public static String lookupHostName(final String dottedQuad) {
+        return reverseDnsCache.get(dottedQuad);
+    }
+}}}
+
+= Expensive Validations =
+
+This is a stupid example (these validations are fast enough), but you get the gist.  Imagine having to do data integrity checks, database queries, LDAP look-ups, factor big , whatever.
