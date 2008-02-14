@@ -8,14 +8,9 @@ import org.apache.commons.lang.NullArgumentException;
 /**
  * A {@link Closure}-based implementation of a {@link Consumer}.
  * 
- * <b>Implementation Note:</b> Due to <a
- * href="http://enfranchisedmind.com/blog/archive/2007/05/17/232" target="v">a
- * failing of generics</a>, there is no type-safety available for this
- * implementation.
- * 
  * @author Robert Fischer
  */
-public abstract class ClosureConsumer extends Consumer {
+public abstract class ClosureConsumer<T> extends Consumer<T> {
 
     /**
      * The implementation of the consumption.
@@ -34,7 +29,7 @@ public abstract class ClosureConsumer extends Consumer {
      * @throws NullArgumentException
      *             If any argument is <code>null</code>
      */
-    public ClosureConsumer(final Closure sink, final ThreadingModel threading, final PipeLink in) {
+    public ClosureConsumer(final Closure sink, final ThreadingModel threading, final PipeLink<T> in) {
         super(threading, in);
         if (sink == null) {
             throw new NullArgumentException("sink");
