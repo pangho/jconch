@@ -70,7 +70,8 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     private final Transformer converter;
 
     /**
-     * Constructs a new instance of the cache map.
+     * Constructs a new instance of the cache map, which uses its own internal
+     * set of locks (see {@link CacheMap#CacheMap(Transformer, SyncLogEqLock)}).
      * 
      * @param converter
      *            The transformer that implements the caching behavior.
