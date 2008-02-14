@@ -5,23 +5,21 @@ import static org.easymock.EasyMock.*;
 import javax.persistence.EntityManager;
 
 import jconch.cache.CacheMap;
-import jconch.lock.SyncLogEqLock;
 
 import org.apache.commons.collections.Transformer;
-import org.apache.commons.lang.UnhandledException;
 
 /**
- * Demonstrates a database look-up which is cached
+ * Demonstrates a database entity look-up which is cached.
  * 
  * @author Robert
  */
-public class BusinessClassThatNeedsADatabaseLookup {
+public class NeedsADatabaseEntityLookup {
 
     private static final CacheMap<Integer, ToyEntity> entityCache = new CacheMap<Integer, ToyEntity>(new Transformer() {
         public Object transform(final Object primaryKey) {
             return getEntityManager().find(ToyEntity.class, primaryKey);
         }
-    }, new SyncLogEqLock<Integer>());
+    });
 
     public static ToyEntity getEntity(final int primaryKey) {
         return entityCache.get(primaryKey);
@@ -32,14 +30,10 @@ public class BusinessClassThatNeedsADatabaseLookup {
      */
 
     static EntityManager getEntityManager() {
-        try {
-            final EntityManager mockEm = createMock(EntityManager.class);
-            expect(mockEm.find(ToyEntity.class, anyObject())).andReturn(new ToyEntity());
-            replay(mockEm);
-            return mockEm;
-        } catch (final Exception e) {
-            throw new UnhandledException("WTF?  Shouldn't be seen.", e);
-        }
+        final EntityManager mockEm = createMock(EntityManager.class);
+        expect(mockEm.find(ToyEntity.class, anyObject())).andReturn(new ToyEntity());
+        replay(mockEm);
+        return mockEm;
     }
 
     static final class ToyEntity {
