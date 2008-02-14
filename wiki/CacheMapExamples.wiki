@@ -4,11 +4,11 @@
 
 The purpose of a thread-safe lazy map is to cache expensive look-ups and calculations, where the cost of looking up a keyed value is so severe that it's worth spending some memory to cache commonly used values.  The most obvious example is in database look-ups, but DNS look-ups and potentially expensive data validations are other good cases.
 
-Down near the bottom, there is even an example of using a MultiKey to cache an arbitrary method.  Synchronization in that case works thanks to the LogEqLock synchronization.  Isn't it nifty how everything works together?
+Down near the bottom, there is even an example of using a MultiKey to cache an arbitrary method.  Synchronization in that case works thanks to the LogEqLock synchronization and MultiKey's careful implementation.  Isn't it nifty how everything works together?
 
 These examples are checked into source code [http://code.google.com/p/jconch/source/browse/trunk/eg/eg/jconch/cachemap/ here].
 
-= Database Entity Look-Ups =
+== Database Entity Look-Ups ==
 
 Many applications spend a lot of time doing look-ups of ORM data entities by key.  This is trivially done with the lazy map.
 {{{
@@ -23,7 +23,7 @@ Many applications spend a lot of time doing look-ups of ORM data entities by key
     }
 }}}
 
-= Reverse DNS Look-Ups =
+== Reverse DNS Look-Ups ==
 
 As [http://www.oreillynet.com/onjava/blog/2005/11/reverse_dns_lookup_and_java.html noted elsewhere], reverse DNS lookups can be really incredibly slow.  Now, I'm not sure if Java or your operating system is going to be caching them, but if not, you could do something like this:
 {{{
@@ -45,7 +45,7 @@ As [http://www.oreillynet.com/onjava/blog/2005/11/reverse_dns_lookup_and_java.ht
     }
 }}}
 
-= Expensive Validations =
+== Expensive Validations ==
 
 This is a stupid example (these validations are fast enough), but you get the gist.  Imagine having to do data integrity checks, database queries, LDAP look-ups, factor big integers, whatever.
 
@@ -62,5 +62,25 @@ This is a stupid example (these validations are fast enough), but you get the gi
 
     public static boolean validateString(final String toValidate) {
         return validationCache.get(toValidate);
+    }
+}}}
+
+== MultiKey Example == 
+Just use the [http://commons.apache.org/collections/api-release/org/apache/commons/collections/keyvalue/MultiKey.html MultiKey], and you can use the CacheMap to cache any arbitrary method.
+{{{
+    private final CacheMap<MultiKey, String> arbitraryCache = new CacheMap<MultiKey, String>(new Transformer() {
+        public Object transform(final Object multiKeyObj) {
+            final MultiKey multiKey = (MultiKey) multiKeyObj;
+            return arbitraryMethod((String) multiKey.getKey(0), (Integer) multiKey.getKey(1), (Double) multiKey
+                    .getKey(2));
+        }
+    });
+
+    public String arbitraryMethod(final String str, final int i, final double d) {
+        return str + (i + d);
+    }
+
+    public String arbitraryMethodCached(final String str, final int i, final double d) {
+        return arbitraryCache.get(new MultiKey(str, i, d));
     }
 }}}
