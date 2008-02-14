@@ -47,4 +47,20 @@ As [http://www.oreillynet.com/onjava/blog/2005/11/reverse_dns_lookup_and_java.ht
 
 = Expensive Validations =
 
-This is a stupid example (these validations are fast enough), but you get the gist.  Imagine having to do data integrity checks, database queries, LDAP look-ups, factor big , whatever.
+This is a stupid example (these validations are fast enough), but you get the gist.  Imagine having to do data integrity checks, database queries, LDAP look-ups, factor big integers, whatever.
+
+{{{
+    private static final CacheMap<String, Boolean> validationCache = new CacheMap<String, Boolean>(new Transformer() {
+        public Object transform(final Object stringToValidate) {
+            if (stringToValidate == null) {
+                return false;
+            }
+            return !StringUtils.isBlank(stringToValidate.toString())
+                    && !StringUtils.isAlpha(stringToValidate.toString());
+        }
+    });
+
+    public static boolean validateString(final String toValidate) {
+        return validationCache.get(toValidate);
+    }
+}}}
