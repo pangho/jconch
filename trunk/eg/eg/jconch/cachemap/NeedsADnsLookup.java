@@ -4,8 +4,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import jconch.cache.CacheMap;
-
-import org.apache.commons.collections.Transformer;
+import jconch.functor.Transformer5;
 
 /**
  * A class which caches reverse DNS look-ups. Rumor has it that Java does this
@@ -14,18 +13,19 @@ import org.apache.commons.collections.Transformer;
  */
 public class NeedsADnsLookup {
 
-    private static final CacheMap<String, String> reverseDnsCache = new CacheMap<String, String>(new Transformer() {
-        public Object transform(Object dottedQuadObj) {
-            if (dottedQuadObj == null) {
-                return null;
-            }
-            try {
-                return InetAddress.getByName(dottedQuadObj.toString());
-            } catch (UnknownHostException e) {
-                return null;
-            }
-        }
-    });
+    private static final CacheMap<String, String> reverseDnsCache = new CacheMap<String, String>(
+            new Transformer5<String, String>() {
+                public String transform(String dottedQuadObj) {
+                    if (dottedQuadObj == null) {
+                        return null;
+                    }
+                    try {
+                        return InetAddress.getByName(dottedQuadObj).getHostName();
+                    } catch (UnknownHostException e) {
+                        return null;
+                    }
+                }
+            });
 
     public static String lookupHostName(final String dottedQuad) {
         return reverseDnsCache.get(dottedQuad);

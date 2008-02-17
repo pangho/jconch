@@ -1,8 +1,8 @@
 package eg.jconch.cachemap;
 
 import jconch.cache.CacheMap;
+import jconch.functor.Transformer5;
 
-import org.apache.commons.collections.Transformer;
 import org.apache.commons.lang.StringUtils;
 
 public class NeedsToDoValidation {
@@ -11,15 +11,12 @@ public class NeedsToDoValidation {
      * the gist. Imagine having to do data integrity checks, database queries,
      * LDAP look-ups, factor big integers, whatever.
      */
-    private static final CacheMap<String, Boolean> validationCache = new CacheMap<String, Boolean>(new Transformer() {
-        public Object transform(final Object stringToValidate) {
-            if (stringToValidate == null) {
-                return false;
-            }
-            return !StringUtils.isBlank(stringToValidate.toString())
-                    && !StringUtils.isAlpha(stringToValidate.toString());
-        }
-    });
+    private static final CacheMap<String, Boolean> validationCache = new CacheMap<String, Boolean>(
+            new Transformer5<String, Boolean>() {
+                public Boolean transform(final String stringToValidate) {
+                    return !StringUtils.isBlank(stringToValidate) && !StringUtils.isAlpha(stringToValidate);
+                }
+            });
 
     public static boolean validateString(final String toValidate) {
         return validationCache.get(toValidate);
