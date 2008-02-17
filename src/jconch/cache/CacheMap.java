@@ -1,11 +1,12 @@
 package jconch.cache;
 
+import static java.util.Collections.synchronizedMap;
 import static org.apache.commons.collections.CollectionUtils.transformedCollection;
-import static org.apache.commons.collections.MapUtils.synchronizedMap;
 import static org.apache.commons.collections.SetUtils.transformedSet;
 
 import java.util.*;
 
+import jconch.functor.Transformer5;
 import jconch.lock.SyncLogEqLock;
 
 import org.apache.commons.collections.Transformer;
@@ -57,7 +58,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * The map that provides the underlying data.
      */
-    private final Map<KEY_T, ResultHolder> base = synchronizedMap(new WeakHashMap());
+    private final Map<KEY_T, ResultHolder> base = synchronizedMap(new WeakHashMap<KEY_T, ResultHolder>());
 
     /**
      * The object that implements the locking for this object.
@@ -67,18 +68,18 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
     /**
      * The object wrapping the cache behavior.
      */
-    private final Transformer converter;
+    private final Transformer5<KEY_T, VAL_T> converter;
 
     /**
      * Constructs a new instance of the cache map, which uses its own internal
-     * set of locks (see {@link CacheMap#CacheMap(Transformer, SyncLogEqLock)}).
+     * set of locks (see {@link CacheMap#CacheMap(Transformer5, SyncLogEqLock)}).
      * 
      * @param converter
      *            The transformer that implements the caching behavior.
      * @throws NullArgumentException
      *             If the argument is <code>null</code>.
      */
-    public CacheMap(final Transformer converter) {
+    public CacheMap(final Transformer5<KEY_T, VAL_T> converter) {
         this(converter, new SyncLogEqLock<KEY_T>());
     }
 
@@ -92,7 +93,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      * @throws NullArgumentException
      *             If either argument is <code>null</code>.
      */
-    public CacheMap(final Transformer converter, final SyncLogEqLock<KEY_T> lockFactory) {
+    public CacheMap(final Transformer5<KEY_T, VAL_T> converter, final SyncLogEqLock<KEY_T> lockFactory) {
         if (converter == null) {
             throw new NullArgumentException("converter");
         }
@@ -161,7 +162,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
                 out = attemptedFetch.result;
             } else {
                 // Okay, doesn't look like we have anything
-                final VAL_T value = (VAL_T) this.converter.transform(key);
+                final VAL_T value = this.converter.transform(key);
                 this.base.put(key, new ResultHolder(value));
                 out = value;
             }
@@ -272,7 +273,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
         } else if (obj == this) {
             return true;
         } else if (obj instanceof CacheMap) {
-            return this.converter.equals(((CacheMap) obj).converter);
+            return this.converter.equals(((CacheMap<?, ?>) obj).converter);
         } else {
             return false;
         }
@@ -285,9 +286,9 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      * 
      * @return The {@link #get(Object)} implementation as its own object.
      */
-    public Transformer asTransformer() {
-        return new Transformer() {
-            public Object transform(final Object in) {
+    public Transformer5<KEY_T, VAL_T> asTransformer() {
+        return new Transformer5<KEY_T, VAL_T>() {
+            public VAL_T transform(final KEY_T in) {
                 return get(in);
             }
         };
@@ -298,7 +299,7 @@ public class CacheMap<KEY_T, VAL_T> implements Map<KEY_T, VAL_T> {
      * 
      * @return The cache operation.
      */
-    public Transformer getTransformer() {
+    public Transformer5<KEY_T, VAL_T> getTransformer() {
         return this.converter;
     }
 

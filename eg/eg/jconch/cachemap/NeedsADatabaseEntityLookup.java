@@ -5,8 +5,7 @@ import static org.easymock.EasyMock.*;
 import javax.persistence.EntityManager;
 
 import jconch.cache.CacheMap;
-
-import org.apache.commons.collections.Transformer;
+import jconch.functor.Transformer5;
 
 /**
  * Demonstrates a database entity look-up which is cached.
@@ -15,11 +14,12 @@ import org.apache.commons.collections.Transformer;
  */
 public class NeedsADatabaseEntityLookup {
 
-    private static final CacheMap<Integer, ToyEntity> entityCache = new CacheMap<Integer, ToyEntity>(new Transformer() {
-        public Object transform(final Object primaryKey) {
-            return getEntityManager().find(ToyEntity.class, primaryKey);
-        }
-    });
+    private static final CacheMap<Integer, ToyEntity> entityCache = new CacheMap<Integer, ToyEntity>(
+            new Transformer5<Integer, ToyEntity>() {
+                public ToyEntity transform(final Integer primaryKey) {
+                    return getEntityManager().find(ToyEntity.class, primaryKey);
+                }
+            });
 
     public static ToyEntity getEntity(final int primaryKey) {
         return entityCache.get(primaryKey);
