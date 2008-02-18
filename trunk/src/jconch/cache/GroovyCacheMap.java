@@ -8,6 +8,9 @@ import jconch.lock.SyncLogEqLock;
  * Creates {@link CacheMap} based on a <a
  * href="http://groovy.codehaus.org/Closures">Groovy closure</a>.
  * 
+ * The closure which is provided will be called with the key as the argument and
+ * be expected to produce the value.
+ * 
  * @author Robert
  */
 public class GroovyCacheMap extends ObjectCacheMap {
