@@ -161,10 +161,8 @@
       <file leaf-file-name="JConchMultiKey.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="54" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56490725">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -635,10 +633,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="54" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56490725">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
+          <folding />
         </state>
       </provider>
     </entry>
