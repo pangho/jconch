@@ -17,7 +17,7 @@
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.iws" afterPath="$PROJECT_DIR$/jconch.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java" afterPath="$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java" />
     </list>
     <ignored path="jconch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,11 +89,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UsingMultiKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingMultiKey.java">
+      <file leaf-file-name="UsingTypedMultiKey.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="13" selection-start="167" selection-end="167" vertical-scroll-proportion="0.06847361">
-              <folding />
+            <state line="36" column="50" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6162625">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -158,7 +160,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JConchMultiKey.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JConchMultiKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
@@ -275,6 +277,54 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch/multikey" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch/cache" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/eg" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/eg/eg/jconch/cachemap" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -479,7 +529,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some bogus documentation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Now uses that super fast hash code when doing comparisons." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -493,6 +543,7 @@
     <MESSAGE value="Upgrading to IntelliJ and adding in the MultiKey stuff." />
     <MESSAGE value="Changing MultiKey to cache the hashCode." />
     <MESSAGE value="Fixed some bogus documentation." />
+    <MESSAGE value="Now uses that super fast hash code when doing comparisons." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -569,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingMultiKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="167" selection-end="167" vertical-scroll-proportion="0.06847361">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/UniKey.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.10271041">
@@ -635,6 +679,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="50" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.6162625">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
