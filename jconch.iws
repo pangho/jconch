@@ -161,7 +161,7 @@
       <file leaf-file-name="JConchMultiKey.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="155" selection-end="155" vertical-scroll-proportion="0.11982881">
+            <state line="33" column="54" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56490725">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -481,7 +481,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changing MultiKey to cache the hashCode." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some bogus documentation." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -494,6 +494,7 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Upgrading to IntelliJ and adding in the MultiKey stuff." />
     <MESSAGE value="Changing MultiKey to cache the hashCode." />
+    <MESSAGE value="Fixed some bogus documentation." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -634,7 +635,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="155" selection-end="155" vertical-scroll-proportion="0.11982881">
+        <state line="33" column="54" selection-start="967" selection-end="967" vertical-scroll-proportion="0.56490725">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
