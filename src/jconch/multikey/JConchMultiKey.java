@@ -57,7 +57,7 @@ public abstract class JConchMultiKey {
     public boolean equals(Object o) {
         if (o != null && o instanceof JConchMultiKey) {
             final JConchMultiKey them = (JConchMultiKey) o;
-            return them.getKeyCount() == this.getKeyCount() && CollectionUtils.isEqualCollection(them.getKeys(), this.getKeys());
+            return them.getKeyCount() == this.getKeyCount() && them.hashCode() == this.hashCode() && CollectionUtils.isEqualCollection(them.getKeys(), this.getKeys());
         } else {
             return false;
         }
