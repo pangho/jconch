@@ -5,9 +5,6 @@ import org.apache.commons.lang.math.RandomUtils;
 
 import java.util.List;
 
-/**
- * The JConch
- */
 public abstract class JConchMultiKey {
 
     private static final int BASE_HASH_CODE = RandomUtils.nextInt();
