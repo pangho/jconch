@@ -16,35 +16,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Java.iml" afterPath="$PROJECT_DIR$/Java.iml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/PipeLink.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/TransformerProcessor.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/BoundedPipeLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.iws" afterPath="$PROJECT_DIR$/jconch.iws" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/ExceptionThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/UnboundedPipeLink.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/InlineThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/Processor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/CollectionProducer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/SingleThreadThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/FactoryProducer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/ExecutorThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/PipeElement.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/BoundedPipeLink.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/TypeSafePipeLink.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/ThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/test/jconch/cache/CacheMapTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/Producer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/Consumer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/CollectionConsumer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/SpawningThreadingModel.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/impl/ClosureConsumer.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jconch/pipeline/PipeStage.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TypeSafePipeLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeElement.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ExecutorThreadingModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ExceptionThreadingModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/SpawningThreadingModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/UnboundedPipeLink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/InlineThreadingModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ClosureConsumer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/ThreadingModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/SingleThreadThreadingModel.java" />
     </list>
     <ignored path="jconch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -107,99 +99,91 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GroovyCacheMapUsage.groovy" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/GroovyCacheMapUsage.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="0" selection-start="133" selection-end="133" vertical-scroll-proportion="0.10271041">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectCacheMapTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ObjectCacheMapTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.3837375">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectCacheMap.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/cache/ObjectCacheMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="43" selection-start="462" selection-end="473" vertical-scroll-proportion="0.17118402">
+            <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.34950072">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DuoKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/DuoKey.java">
+      <file leaf-file-name="Consumer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.42796007">
-              <folding>
-                <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TriKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/TriKey.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.11982881">
-              <folding>
-                <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleTriKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.10271041">
+            <state line="11" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.15406562">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleQuadKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
+      <file leaf-file-name="CollectionConsumer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.10271041">
+            <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.7703281">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuadKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
+      <file leaf-file-name="CollectionProducer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.29101285">
-              <folding>
-                <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JConchMultiKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
+            <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.8116976">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimpleDuoKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleDuoKey.java">
+      <file leaf-file-name="Processor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.17118402">
+            <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.2125535">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransformerProcessor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.44507846">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeStage.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.2125535">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FactoryProducer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.5206847">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Producer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="0.65763193">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeLink.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.2125535">
               <folding />
             </state>
           </provider>
@@ -576,12 +560,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="874" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="7" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" order="1" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" order="1" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288948" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3262317" order="8" />
@@ -613,7 +597,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated to the ObjectCacheMap, since that's what the unit tests are actually talking about." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated to using a sandbox for the pipeline stuff (and other experiments)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -631,6 +615,7 @@
     <MESSAGE value="Put in an example of using a typed multikey." />
     <MESSAGE value="Updated various examples." />
     <MESSAGE value="Updated to the ObjectCacheMap, since that's what the unit tests are actually talking about." />
+    <MESSAGE value="Updated to using a sandbox for the pipeline stuff (and other experiments)" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -679,83 +664,23 @@
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="17" selection-start="3092" selection-end="3092" vertical-scroll-proportion="0.5833333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/NeedsADatabaseEntityLookup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="13" selection-start="1159" selection-end="1159" vertical-scroll-proportion="0.9464286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/NeedsADnsLookup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="8" selection-start="628" selection-end="628" vertical-scroll-proportion="0.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/UniKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="109" selection-end="109" vertical-scroll-proportion="0.10271041">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/NeedsToDoValidation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.06847361">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="22" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.7189729">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/DuoKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.42796007">
-          <folding>
-            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/TriKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.11982881">
-          <folding>
-            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.10271041">
+        <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.16035634">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.10271041">
+        <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.16035634">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.29101285">
+        <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.454343">
           <folding>
             <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
           </folding>
@@ -764,14 +689,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
+        <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="1.3387097">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleDuoKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.17118402">
+        <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.26726058">
           <folding />
         </state>
       </provider>
@@ -783,19 +708,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/cache/ObjectCacheMap.java">
+    <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="43" selection-start="462" selection-end="473" vertical-scroll-proportion="0.17118402">
+        <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.34950072">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.3837375">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="11" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.15406562">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.7703281">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.8116976">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.2125535">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.44507846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.2125535">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.5206847">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="0.65763193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.2125535">
+          <folding />
         </state>
       </provider>
     </entry>
