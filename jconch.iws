@@ -16,11 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.ipr" afterPath="$PROJECT_DIR$/jconch.ipr" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ivy/ivy.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ivy/ivy.xml" afterPath="$PROJECT_DIR$/ivy/ivy.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.iws" afterPath="$PROJECT_DIR$/jconch.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.number" afterPath="$PROJECT_DIR$/build.number" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ivy" />
     </list>
     <ignored path="jconch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -167,7 +164,7 @@
       <file leaf-file-name="ivy.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ivy/ivy.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="7" column="73" selection-start="506" selection-end="506" vertical-scroll-proportion="0.19444445">
               <folding />
             </state>
           </provider>
@@ -674,7 +671,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ivy/ivy.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="7" column="73" selection-start="506" selection-end="506" vertical-scroll-proportion="0.19444445">
           <folding />
         </state>
       </provider>
