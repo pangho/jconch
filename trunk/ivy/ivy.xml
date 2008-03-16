@@ -6,7 +6,6 @@
     <info organisation="com.smokejumperit" module="jconch">
         <license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/lgpl.html"/>
         <ivyauthor name="Robert Fischer" url="http://smokejumperit.com"/>
-        <repository name="smokejumper-jconch" url="http://smokejumperit.com/jconch/ivy/" ivys="true" artifacts="true"/>
         <description homepage="http://code.google.com/p/jconch"/>
     </info>
     <configurations defaultconfmapping="plainjava">
