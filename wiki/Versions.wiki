@@ -10,7 +10,7 @@ You've got a version number.  What's that mean?
 Incrementing the version numbers have a pretty strict meaning on the JConch project.
   * *All Versions Pre-1.0* -- Releases were pretty willy-nilly, with a lot of experimentation going on.
   * *Major Releases* -- Tested and ready to go, with no guaranty of any backward compatibility to the previous major release series.
-  * *`x.9` Minor Release* -- The release candidate for the next major release.
+  * *x.9 Minor Release* -- The release candidate for the next major release.
   * *Minor Releases < x.9* -- New API may be introduced, and warning-inducing changes to the code base (incl. deprecation) may be introduced.
   * *Point Releases* -- No API changes: bugfixes only.
 
