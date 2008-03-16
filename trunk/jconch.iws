@@ -16,27 +16,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/BoundedPipeLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.ipr" afterPath="$PROJECT_DIR$/jconch.ipr" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ivy/ivy.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.iws" afterPath="$PROJECT_DIR$/jconch.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TypeSafePipeLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeElement.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ExecutorThreadingModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ExceptionThreadingModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/SpawningThreadingModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/UnboundedPipeLink.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/InlineThreadingModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/ClosureConsumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/ThreadingModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sandbox/jconch/pipeline/impl/SingleThreadThreadingModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.number" afterPath="$PROJECT_DIR$/build.number" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ivy" />
     </list>
     <ignored path="jconch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,28 +83,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ObjectCacheMapTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.34950072">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Consumer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.15406562">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CollectionConsumer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.7703281">
+            <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="1.2053572">
               <folding />
             </state>
           </provider>
@@ -129,7 +95,7 @@
       <file leaf-file-name="CollectionProducer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.8116976">
+            <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="1.2700893">
               <folding />
             </state>
           </provider>
@@ -138,7 +104,7 @@
       <file leaf-file-name="Processor.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.2125535">
+            <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.3325893">
               <folding />
             </state>
           </provider>
@@ -147,7 +113,7 @@
       <file leaf-file-name="TransformerProcessor.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.44507846">
+            <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.6964286">
               <folding />
             </state>
           </provider>
@@ -156,7 +122,7 @@
       <file leaf-file-name="PipeStage.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.2125535">
+            <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.3325893">
               <folding />
             </state>
           </provider>
@@ -165,7 +131,7 @@
       <file leaf-file-name="FactoryProducer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.5206847">
+            <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.81473213">
               <folding />
             </state>
           </provider>
@@ -174,16 +140,34 @@
       <file leaf-file-name="Producer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="0.65763193">
+            <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="1.0290178">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PipeLink.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PipeLink.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.2125535">
+            <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.3325893">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="17" selection-start="1178" selection-end="1178" vertical-scroll-proportion="0.8055556">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ivy.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ivy/ivy.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -228,6 +212,28 @@
           <option name="myItemId" value="Java" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
         </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="lib" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+        </PATH_ELEMENT>
       </PATH>
       <PATH>
         <PATH_ELEMENT>
@@ -257,121 +263,7 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch/cache" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/sandbox" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/sandbox/jconch/pipeline" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/eg" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/eg/eg/jconch/cachemap" />
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/ivy" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -576,7 +468,7 @@
       <window_info id="Ant Build" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24928162" order="4" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756326" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
@@ -597,7 +489,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated to using a sandbox for the pipeline stuff (and other experiments)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Checking in what (I think) is a totally legitimate ivy file." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -616,6 +508,7 @@
     <MESSAGE value="Updated various examples." />
     <MESSAGE value="Updated to the ObjectCacheMap, since that's what the unit tests are actually talking about." />
     <MESSAGE value="Updated to using a sandbox for the pipeline stuff (and other experiments)" />
+    <MESSAGE value="Checking in what (I think) is a totally legitimate ivy file." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -657,27 +550,21 @@
     <buildFile url="file://$PROJECT_DIR$/build.xml">
       <antCommandLine value="" />
       <runInBackground value="true" />
-      <targetFilters />
+      <targetFilters>
+        <filter targetName="-init" isVisible="false" />
+        <filter targetName="build-all" isVisible="true" />
+        <filter targetName="build-bin" isVisible="true" />
+        <filter targetName="build-dep" isVisible="true" />
+        <filter targetName="build-doc" isVisible="true" />
+        <filter targetName="build-src" isVisible="true" />
+        <filter targetName="clean" isVisible="false" />
+      </targetFilters>
       <treeView value="false" />
       <verbose value="true" />
       <viewClosedWhenNoErrors value="false" />
     </buildFile>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.16035634">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.16035634">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.454343">
@@ -710,70 +597,84 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.34950072">
+        <state line="89" column="30" selection-start="2980" selection-end="2980" vertical-scroll-proportion="0.54565704">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Consumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.15406562">
+        <state line="11" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.24107143">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionConsumer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.7703281">
+        <state line="52" column="25" selection-start="1545" selection-end="1545" vertical-scroll-proportion="1.2053572">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/CollectionProducer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="0.8116976">
+        <state line="69" column="25" selection-start="1794" selection-end="1794" vertical-scroll-proportion="1.2700893">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Processor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.2125535">
+        <state line="34" column="14" selection-start="820" selection-end="820" vertical-scroll-proportion="0.3325893">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/TransformerProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.44507846">
+        <state line="30" column="8" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.6964286">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeStage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.2125535">
+        <state line="41" column="46" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.3325893">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/impl/FactoryProducer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.5206847">
+        <state line="50" column="12" selection-start="1470" selection-end="1470" vertical-scroll-proportion="0.81473213">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/Producer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="0.65763193">
+        <state line="141" column="12" selection-start="4313" selection-end="4313" vertical-scroll-proportion="1.0290178">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sandbox/jconch/pipeline/PipeLink.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.2125535">
+        <state line="218" column="16" selection-start="7194" selection-end="7194" vertical-scroll-proportion="0.3325893">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="17" selection-start="1178" selection-end="1178" vertical-scroll-proportion="0.8055556">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ivy/ivy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
