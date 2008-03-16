@@ -1,0 +1,24 @@
+<?xml-stylesheet type="text/xsl" href="http://ivyrep.jayasoft.org/ivy-doc.xsl"?>
+<ivy-module version="1.3"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd"
+        >
+    <info organisation="com.smokejumperit" module="jconch">
+        <license name="GNU Lesser General Public License" url="http://www.gnu.org/licenses/lgpl.html"/>
+        <ivyauthor name="Robert Fischer" url="http://smokejumperit.com"/>
+        <repository name="smokejumper-jconch" url="http://smokejumperit.com/jconch/ivy/" ivys="true" artifacts="true"/>
+        <description homepage="http://code.google.com/p/jconch"/>
+    </info>
+    <configurations defaultconfmapping="plainjava">
+        <conf name="plainjava" description="To be used with straight Java 1.5+"/>
+        <conf name="groovy" extends="plainjava" description="To be used with Groovy"/>
+    </configurations>
+    <publications>
+        <artifact/>
+    </publications>
+    <dependencies defaultconfmapping="plainjava">
+        <dependency org="apache" name="commons-lang" rev="[2.3,)"/>
+        <dependency org="apache" name="commons-collections" rev="[3.2,)"/>
+        <dependency org="codehaus" name="groovy" rev="[1.5,)" conf="groovy"/>
+    </dependencies>
+</ivy-module>
