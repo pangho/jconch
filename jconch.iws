@@ -16,12 +16,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/eg/eg/jconch/cachemap/GroovyCacheMapUsage.groovy" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingMultiKey.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Java.iml" afterPath="$PROJECT_DIR$/Java.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.ipr" afterPath="$PROJECT_DIR$/jconch.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jconch.iws" afterPath="$PROJECT_DIR$/jconch.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.number" afterPath="$PROJECT_DIR$/build.number" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/dev-lib/groovy-1.5.4.jar" afterPath="$PROJECT_DIR$/lib/groovy-1.5.4.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java" />
     </list>
     <ignored path="jconch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,44 +82,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UsingTypedMultiKey.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="22" selection-start="1592" selection-end="1592" vertical-scroll-proportion="1.1275167">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroovyCacheMapUsage.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="GroovyCacheMapUsage.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/GroovyCacheMapUsage.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="1" selection-start="36" selection-end="135" vertical-scroll-proportion="0.13422818">
+            <state line="6" column="0" selection-start="133" selection-end="133" vertical-scroll-proportion="0.10271041">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CacheMapTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/jconch/cache/CacheMapTest.java">
+      <file leaf-file-name="ObjectCacheMapTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="36" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.72483224">
+            <state line="119" column="28" selection-start="4083" selection-end="4083" vertical-scroll-proportion="0.8972896">
               <folding>
-                <marker date="1205529522000" expanded="true" signature="408:595" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="636:761" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="814:1059" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="1097:1457" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="1497:1755" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="1798:2110" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="2170:2326" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="2437:2508" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="2620:2692" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="2728:2960" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="3021:3197" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="3296:3414" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="3510:3680" placeholder="{...}" />
-                <marker date="1205529522000" expanded="true" signature="3789:3831" placeholder="{...}" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObjectCacheMap.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/jconch/cache/ObjectCacheMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="43" selection-start="462" selection-end="473" vertical-scroll-proportion="0.17118402">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,7 +114,7 @@
       <file leaf-file-name="DuoKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/DuoKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.67114097">
+            <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.42796007">
               <folding>
                 <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
               </folding>
@@ -140,7 +125,7 @@
       <file leaf-file-name="TriKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/TriKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.18791947">
+            <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.11982881">
               <folding>
                 <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
               </folding>
@@ -151,7 +136,7 @@
       <file leaf-file-name="SimpleTriKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.16107382">
+            <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.10271041">
               <folding />
             </state>
           </provider>
@@ -160,7 +145,7 @@
       <file leaf-file-name="SimpleQuadKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.16107382">
+            <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.10271041">
               <folding />
             </state>
           </provider>
@@ -169,7 +154,7 @@
       <file leaf-file-name="QuadKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.45637584">
+            <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.29101285">
               <folding>
                 <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
               </folding>
@@ -180,7 +165,7 @@
       <file leaf-file-name="JConchMultiKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="1.3449074">
+            <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
               <folding />
             </state>
           </provider>
@@ -189,7 +174,7 @@
       <file leaf-file-name="SimpleDuoKey.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleDuoKey.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.26845637">
+            <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.17118402">
               <folding />
             </state>
           </provider>
@@ -263,11 +248,55 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch" />
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/test/jconch/cache" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -290,36 +319,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch/multikey" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-      </PATH>
-      <PATH>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Java" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/jconch/cache" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -385,12 +384,41 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
       <module name="" />
       <setting name="path" value="" />
       <setting name="vmparams" value="" />
       <setting name="params" value="" />
-      <setting name="workDir" value="." />
+      <setting name="workDir" value="$PROJECT_DIR$/." />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
@@ -421,25 +449,6 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -453,27 +462,17 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+    <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <method>
-        <option name="Make" value="true" />
-      </method>
     </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="Groovy Script.GroovyCacheMapUsage" />
@@ -529,7 +528,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="874" extended-state="6" />
+    <frame x="0" y="22" width="1440" height="874" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
@@ -546,7 +545,7 @@
       <window_info id="Ant Build" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24928162" order="4" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3288948" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756326" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="4" />
@@ -567,7 +566,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Put in an example of using a typed multikey." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated to the ObjectCacheMap, since that's what the unit tests are actually talking about." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -583,6 +582,8 @@
     <MESSAGE value="Fixed some bogus documentation." />
     <MESSAGE value="Now uses that super fast hash code when doing comparisons." />
     <MESSAGE value="Put in an example of using a typed multikey." />
+    <MESSAGE value="Updated various examples." />
+    <MESSAGE value="Updated to the ObjectCacheMap, since that's what the unit tests are actually talking about." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -659,61 +660,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/DuoKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.67114097">
-          <folding>
-            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/TriKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.18791947">
-          <folding>
-            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.16107382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.16107382">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.45637584">
-          <folding>
-            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="1.3449074">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleDuoKey.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.26845637">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/NeedsToDoValidation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.06847361">
@@ -723,37 +669,86 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/UsingTypedMultiKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="22" selection-start="1592" selection-end="1592" vertical-scroll-proportion="1.1275167">
+        <state line="44" column="22" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.7189729">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/jconch/cache/CacheMapTest.java">
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/DuoKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="36" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.72483224">
+        <state line="26" column="49" selection-start="569" selection-end="569" vertical-scroll-proportion="0.42796007">
           <folding>
-            <marker date="1205529522000" expanded="true" signature="408:595" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="636:761" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="814:1059" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="1097:1457" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="1497:1755" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="1798:2110" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="2170:2326" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="2437:2508" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="2620:2692" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="2728:2960" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="3021:3197" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="3296:3414" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="3510:3680" placeholder="{...}" />
-            <marker date="1205529522000" expanded="true" signature="3789:3831" placeholder="{...}" />
+            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/TriKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="189" selection-end="189" vertical-scroll-proportion="0.11982881">
+          <folding>
+            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleTriKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="202" selection-end="202" vertical-scroll-proportion="0.10271041">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleQuadKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="4" selection-start="211" selection-end="211" vertical-scroll-proportion="0.10271041">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/QuadKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="73" selection-start="564" selection-end="564" vertical-scroll-proportion="0.29101285">
+          <folding>
+            <marker date="1205533504000" expanded="true" signature="33:73" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/JConchMultiKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="100" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.8469388">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/multikey/SimpleDuoKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="5" selection-start="320" selection-end="320" vertical-scroll-proportion="0.17118402">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eg/eg/jconch/cachemap/GroovyCacheMapUsage.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="1" selection-start="36" selection-end="135" vertical-scroll-proportion="0.13422818">
+        <state line="6" column="0" selection-start="133" selection-end="133" vertical-scroll-proportion="0.10271041">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jconch/cache/ObjectCacheMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="43" selection-start="462" selection-end="473" vertical-scroll-proportion="0.17118402">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/jconch/cache/ObjectCacheMapTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="28" selection-start="4083" selection-end="4083" vertical-scroll-proportion="0.8972896">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
