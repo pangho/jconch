@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * stall might cause a delay in processing. The fetch timeout is the amount of
  * time to wait before the stall is detected. The default value is
  * <code>0</code>, which means to not wait at all, but act in pass-through
- * mode.
+ * mode. 
  * </p>
  * <p>
  * The link requires at least one <em>source</em> and one <em>sink</em> to
