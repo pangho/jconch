@@ -132,6 +132,6 @@ Of course, if you're using Groovy, you can make life go a whole lot faster.
 {{{
 def cacheMap = new GroovyCacheMap() { a -> a * 2 }
 (1..5).each { i ->
-    println cacheMap.get(i)
+    println cacheMap[i]
 }
 }}}
