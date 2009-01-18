@@ -21,6 +21,10 @@ public class Assert {
 	private static final int MAX_THREADS = 10;
 	private static final int NUM_ITERATIONS = 1000;
 
+	private Assert() {
+		throw new AssertionError(); 
+	}
+
 	/**
 	 * <p>The assertSynchronized method attempts to cause concurrency errors by repeatedly invoking code on seperate threads. </p>
 	 *

@@ -9,10 +9,16 @@ import java.util.concurrent.Callable;
  */
 class DummyRunnable implements Runnable {
 	private boolean wasCalled = false;
+
 	public void run() {
 		wasCalled = true;
 	}
 
+	/**
+	 * Lets you know whether this Runnable was invoked.
+	 * @return
+	 * 		true if this was invoked, false otherwise
+	 */
 	boolean wasCalled() {
 		return wasCalled;
 	}
