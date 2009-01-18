@@ -134,4 +134,19 @@ public class AssertTest {
 			}
 		);
 	}
+
+	@Test
+	public void testAssertSynchronized_TasksCountGreaterThanMaxThreads() throws Exception {
+		Assert.assertSynchronized(
+			new Callable<List<Callable<Void>>>(){
+				public List<Callable<Void>> call() throws Exception {
+					return new ArrayList<Callable<Void>>(){{
+						add(new DummyCallable());
+						add(new DummyCallable());
+					}};
+				}
+			},
+			1,	//only use 1 thread to force # tasks > # threads 
+			1);
+	}
 }

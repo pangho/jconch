@@ -101,7 +101,7 @@ public class Assert {
 	private static void doAssertSynchronized(Callable<? extends Collection<Callable<Void>>> taskFactory, int maxThreads, int numIterations) throws Exception {
 		if (taskFactory == null) throw new NullPointerException("Null: taskFactory");
 		if (maxThreads <= 0) throw new IllegalArgumentException("maxThreads must be positive. Received: " + maxThreads);
-		if (numIterations <= 0) throw new IllegalArgumentException("numIterations must be positive. Received: " + maxThreads); 
+		if (numIterations <= 0) throw new IllegalArgumentException("numIterations must be positive. Received: " + numIterations); 
 
 		final ExecutorService executor = Executors.newFixedThreadPool(maxThreads);
 		final AtomicInteger failureCount = new AtomicInteger(0);
@@ -110,7 +110,7 @@ public class Assert {
 		for (int x = 0; x < numIterations; x++) {
 			final Collection<Callable<Void>> tasks = taskFactory.call();
 			final int numTasks = tasks.size();
-			final CyclicBarrier startGate = new CyclicBarrier(numTasks);
+			final CyclicBarrier startGate = new CyclicBarrier(Math.min(numTasks, maxThreads));
 			final CountDownLatch endGate = new CountDownLatch(numTasks);
 
 			for (final Callable task : tasks) {

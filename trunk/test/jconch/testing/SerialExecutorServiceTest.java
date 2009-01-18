@@ -44,12 +44,12 @@ public class SerialExecutorServiceTest {
 			//expected
 		}
 		try {
-			service.submit(new ErrorlRunnable(), null);
+			service.submit(new ErrorRunnable(), null);
 		} catch (RejectedExecutionException ignored) {
 			//expected
 		}
 		try {
-			service.submit(new ErrorlRunnable());
+			service.submit(new ErrorRunnable());
 		} catch (RejectedExecutionException ignored) {
 			//expected
 		}
@@ -82,17 +82,17 @@ public class SerialExecutorServiceTest {
 		assertSame(expectedResult, service.submit(new ValueCallable(expectedResult)).get());
 		final DummyRunnable dummyRunnable = new DummyRunnable();
 		assertNull(((Future<?>) service.submit(dummyRunnable)).get());
-		assertTrue(dummyRunnable.wasCalled);
+		assertTrue(dummyRunnable.wasCalled());
 		final DummyRunnable dummyRunnable2 = new DummyRunnable();
 		assertSame(expectedResult, service.submit(dummyRunnable2, expectedResult).get());
-		assertTrue(dummyRunnable2.wasCalled);
+		assertTrue(dummyRunnable2.wasCalled());
 	}
 
 	@Test
 	public void testExecute() throws Exception {
 		final DummyRunnable runnable = new DummyRunnable();
 		service.execute(runnable);
-		assertTrue(runnable.wasCalled); 
+		assertTrue(runnable.wasCalled());
 	}
 
 	@Test
@@ -157,17 +157,11 @@ public class SerialExecutorServiceTest {
 			return value;
 		}
 	}
-	private static class ErrorlRunnable implements Runnable {
+	private static class ErrorRunnable implements Runnable {
 
 		public void run() {
 			throw new IllegalStateException(String.format("%s may not be invoked.", getClass().getName()));
 		}
 	}
 
-	private static class DummyRunnable implements Runnable {
-		private boolean wasCalled = false;
-		public void run() {
-			wasCalled = true;
-		}
-	}
 }
