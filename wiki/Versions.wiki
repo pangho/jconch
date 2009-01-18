@@ -16,5 +16,6 @@ Incrementing the version numbers have a pretty strict meaning on the JConch proj
 
 
 = Changelog =
+  * *1.1* -- Added concurrent testing utilities Assert#assertSynchronized and SerialExecutorService. Updated documentation. 
   * *1.0* -- Moved pipelines over to the sandbox, and got the unit tests to where they should be.
   * *0.3* -- Implemented typing for the CacheMap, with the untyped version being relegated to ObjectCacheMap.  Also implemented the GroovyCacheMap for one-line groovytastic gold.  See more [http://enfranchisedmind.com/blog/2008/03/14/jconch-03-released/ at the EnfranchisedMind post]
