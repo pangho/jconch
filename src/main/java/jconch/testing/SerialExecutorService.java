@@ -119,7 +119,7 @@ public class SerialExecutorService implements ExecutorService {
 	 * @return
 	 * 		all the futures
 	 */
-	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks) throws InterruptedException {
+	public <T> List<Future<T>> invokeAll(Collection<Callable<T>> tasks) throws InterruptedException {
 		return doInvokeAll(tasks, new NeverTimeoutStrategy());
 	}
 
@@ -134,7 +134,7 @@ public class SerialExecutorService implements ExecutorService {
 	 * @return
 	 * 		all the futures, some will be evaluated some will not depending on timeout
 	 */
-	public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) {
+	public <T> List<Future<T>> invokeAll(Collection<Callable<T>> tasks, long timeout, TimeUnit unit) {
 		return doInvokeAll(tasks, new TimeoutClockStartingNow(timeout, unit));
 	}
 
@@ -171,7 +171,7 @@ public class SerialExecutorService implements ExecutorService {
 	 * @throws ExecutionException
 	 * 		if no task ended successfully
 	 */
-	public <T> T invokeAny(Collection<? extends Callable<T>> tasks) throws InterruptedException, ExecutionException {
+	public <T> T invokeAny(Collection<Callable<T>> tasks) throws InterruptedException, ExecutionException {
 		try {
 			return doInvokeAny(tasks, new NeverTimeoutStrategy());
 		} catch (TimeoutException e) {
@@ -197,7 +197,7 @@ public class SerialExecutorService implements ExecutorService {
 	 * @throws TimeoutException
 	 * 		if timeout occurs
 	 */
-	public <T> T invokeAny(Collection<? extends Callable<T>> tasks, long timeout, TimeUnit unit) throws ExecutionException, TimeoutException {
+	public <T> T invokeAny(Collection<Callable<T>> tasks, long timeout, TimeUnit unit) throws ExecutionException, TimeoutException {
 		return doInvokeAny(tasks, new TimeoutClockStartingNow(timeout, unit));
 	}
 
