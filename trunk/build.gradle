@@ -1,1 +1,46 @@
 usePlugin 'java'
+usePlugin 'maven'
+usePlugin 'osgi'
+
+configurations {
+    deployerJars
+}
+
+repositories {
+  mavenRepo urls: "file://${System.properties['user.home']}/.m2/repository/"
+  mavenCentral()
+}
+dependencies {
+  compile group:'commons-collections', name:'commons-collections', version:'3.2.1'
+  compile group:'commons-lang', name:'commons-lang', version:'2.4'
+  compile group:'org.codehaus.groovy', name:'groovy', version:'1.7.0'
+
+  deployerJars 'org.apache.maven.wagon:wagon-ssh:1.0-beta-2'
+}
+
+
+uploadArchives { 
+  repositories.mavenDeployer {
+    def repoUser = System.properties['sjit.repo.user']
+    configuration = configurations.deployerJars
+    repository(url: "scp://repo.smokejumperit.com/home/$repoUser/repo.smokejumperit.com/") {
+      authentication(
+        userName: repoUser,
+        privateKey: new File(System.properties['sjit.repo.keyFile']).absolutePath, 
+        passphrase: System.properties['sjit.repo.passphrase']
+      )   
+      pom {
+        groupId=mavenGroupId
+        artifactId=mavenArtifactId
+        version=version
+      }   
+    }   
+  }   
+} 
+
+configure(jar.osgi) {
+  version = version
+  name = mavenGroupId
+  instruction 'Import-Package', '*'
+  instruction 'Export-Package', '*'
+}
